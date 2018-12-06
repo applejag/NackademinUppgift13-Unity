@@ -5,7 +5,7 @@
 [Ll]ogs/
 
 # Unity packages
-/[Pp]ackages/*/
+# /[Pp]ackages/*/
 
 # Self made folders
 [Bb]ackups/
