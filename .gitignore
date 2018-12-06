@@ -4,6 +4,9 @@
 [Oo]bj/
 [Ll]ogs/
 
+# Unity packages
+/[Pp]ackages/*/
+
 # Self made folders
 [Bb]ackups/
 [Bb]ackup/
@@ -20,6 +23,7 @@
 /*.pidb
 /*.booproj
 /.vs
+/*.DotSettings
 
 # =========================
 # Operating System Files
