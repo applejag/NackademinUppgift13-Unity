@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
 
             ushort port = ushort.Parse(clientPortField.text);
             string address = clientAddressField.text.Trim();
-            Log($"Connecting to {game.RemotePlayer.EndPoint}...", Color.gray);
+            Log($"Connecting to {address}:{port}...", Color.gray);
 
             game = await BattleGame.ConnectAsync(address, port, localBoard, nameField.text);
 
