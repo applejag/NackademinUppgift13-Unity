@@ -3,6 +3,7 @@
 [Tt]emp/
 [Oo]bj/
 [Ll]ogs/
+.gradle/
 
 # Unity packages
 # /[Pp]ackages/*/

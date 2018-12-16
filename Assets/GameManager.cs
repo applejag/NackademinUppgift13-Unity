@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Sockets;
 using BattleshipProtocol;
 using BattleshipProtocol.Game;
 using BattleshipProtocol.Game.Commands;
@@ -39,6 +41,9 @@ public class GameManager : MonoBehaviour
         dcButton.interactable = false;
         logText.text = string.Empty;
         SetStatus();
+
+        CultureInfo.DefaultThreadCurrentCulture =
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en-US");
     }
 
     private void SetStatus()
@@ -80,6 +85,7 @@ public class GameManager : MonoBehaviour
         catch (Exception e)
         {
             Log(e.Message, Color.red);
+            Debug.LogException(e);
         }
     }
 
@@ -107,11 +113,21 @@ public class GameManager : MonoBehaviour
 
             Log($"Game connected with {game.RemotePlayer.EndPoint}", Color.green);
             HookupGameEvents();
-        } catch (Exception e)
+        }
+        catch (SocketException se)
+        {
+            DisposeTheGame();
+
+            Log(se.Message, Color.red);
+            Debug.LogError($"{(int)se.SocketErrorCode} {se.SocketErrorCode}");
+            Debug.LogException(se);
+        }
+        catch (Exception e)
         {
             DisposeTheGame();
 
             Log(e.Message, Color.red);
+            Debug.LogException(e);
         }
     }
 
@@ -144,6 +160,7 @@ public class GameManager : MonoBehaviour
             DisposeTheGame();
 
             Log(e.Message, Color.red);
+            Debug.LogException(e);
         }
     }
 
@@ -224,7 +241,7 @@ public class GameManager : MonoBehaviour
     {
         string Hex(float c)
         {
-            return ((int) (c * 255)).ToString("x2");
+            return ((int)(c * 255)).ToString("x2");
         }
         Dispatcher.Invoke(delegate
         {
