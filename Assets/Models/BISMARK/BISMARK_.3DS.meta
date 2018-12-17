@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: 5646395af0993d04c917e15ec13597ed
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: BSM-BISM. SIDE
+    2100002: BSM-TOP-GUN-BA
+    2100004: BSM-GRAY NB1
+    2100006: BSM-GRAY WB 02
+    2100008: BSM-DARK
+    2100010: BSM-TORPEDO
+    2100012: BSM-GRAY NB2
+    2100014: BSM-DRK MTL W1
+    2100016: BSM-DECK
+    2100018: BSM-LARGE BOAT
+    2100020: BSM-CRANE
+    2100022: BSM-DRK MTL NB_
+    2100024: BSM-BOAT T1
+    2100026: BSM-RADAR GRID
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Object01
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-BISM. SIDE
+    second: {fileID: 2100000, guid: b5c99df7c0d572e429027c8914e028d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-BOAT T1
+    second: {fileID: 2100000, guid: 6c0856da2dcdc9346ae1e59506047c99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-CRANE
+    second: {fileID: 2100000, guid: 742add128cd1da34f9478ab037fab976, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-DARK
+    second: {fileID: 2100000, guid: a41568c645135714584131a6efce7b51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-DECK
+    second: {fileID: 2100000, guid: 5fa8dbbfec29a364297fd68606f8203f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-DRK MTL NB_
+    second: {fileID: 2100000, guid: 11f2be032e4eded4b92ca61d186850c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-DRK MTL W1
+    second: {fileID: 2100000, guid: f2834da4b9c19534399b4672a1bac781, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-GRAY NB1
+    second: {fileID: 2100000, guid: a65f1bc26cece7e4cbb83947d9b23f72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-GRAY NB2
+    second: {fileID: 2100000, guid: f6d03546f2e7be046b5669b07708bd38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-GRAY WB 02
+    second: {fileID: 2100000, guid: 3265d8b8999cf504c97a77abe4ad4a2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-LARGE BOAT
+    second: {fileID: 2100000, guid: faf43c3990593404d8b8b11a8eb8cb2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-RADAR GRID
+    second: {fileID: 2100000, guid: 660686a2f29bc084c959198fd86bbfb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-TOP-GUN-BA
+    second: {fileID: 2100000, guid: 69828e2a64a57084e820609af1735d3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BSM-TORPEDO
+    second: {fileID: 2100000, guid: 052737ee1c97e4a499617741e2cb97bd, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0002
+    meshCompression: 1
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 1
+    swapUVChannels: 1
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
