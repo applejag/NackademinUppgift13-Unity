@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4004103121678420936}
   - component: {fileID: 7009791491223191069}
+  - component: {fileID: 3542344194719377088}
+  - component: {fileID: 8458154243761035040}
   m_Layer: 0
   m_Name: Carrier
   m_TagString: Untagged
@@ -44,6 +46,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d421e3079969254459932e39dcdd93bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  shipType: 1
+--- !u!65 &3542344194719377088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4004103121678325736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 5}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!65 &8458154243761035040
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4004103121678325736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.30000007, y: 0.39999986, z: 1.0999999}
+  m_Center: {x: 0.34999996, y: 0.70000005, z: -0.54999995}
 --- !u!1 &4004103121678325738
 GameObject:
   m_ObjectHideFlags: 0

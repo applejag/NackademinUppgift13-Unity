@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d421e3079969254459932e39dcdd93bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  shipType: 5
+  length: 2
+  orientation: 0
 --- !u!1001 &7220533309135548177
 PrefabInstance:
   m_ObjectHideFlags: 0

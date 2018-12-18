@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BattleshipProtocol.Game;
 using UnityEngine;
 
 public class GameBoard : MonoBehaviour
@@ -8,6 +9,15 @@ public class GameBoard : MonoBehaviour
     public Transform boardToWorldTransform;
 
     public List<GameShip> ships;
+    public Board protocolBoard = new Board();
+
+    private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+    private Camera cam;
+
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -34,16 +44,26 @@ public class GameBoard : MonoBehaviour
     }
 #endif
 
-    public Vector2Int GetWorldToBoard(Vector3 pos)
+    public Vector2Int WorldToCoordinate(Vector3 pos)
     {
         Vector3 inverseTransformPoint = boardToWorldTransform.InverseTransformPoint(pos);
         return Vector2Int.FloorToInt(new Vector2(inverseTransformPoint.x, inverseTransformPoint.z));
     }
 
-    public Vector3 GetBoardToWorld(Vector2Int pos, float y = 0)
+    public Vector3 CoordinateToWorld(Vector2Int pos, float y = 0)
     {
         Vector3 point = boardToWorldTransform.TransformPoint(new Vector3(pos.x + 0.5f, 0, pos.y + 0.5f));
         point.y = y;
         return point;
+    }
+
+    public Vector2Int ScreenSpaceToCoordinate(Vector3 pos)
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (!groundPlane.Raycast(ray, out float distance))
+            return new Vector2Int(-1, -1);
+
+        return WorldToCoordinate(ray.GetPoint(distance));
     }
 }

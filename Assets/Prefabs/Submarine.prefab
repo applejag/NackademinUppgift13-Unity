@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6750274748301790484}
   - component: {fileID: 6033382293878360385}
+  - component: {fileID: 82575688254121447}
   m_Layer: 0
   m_Name: Submarine
   m_TagString: Untagged
@@ -44,6 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d421e3079969254459932e39dcdd93bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  shipType: 4
+--- !u!65 &82575688254121447
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401059629779113026}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 3}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &8510028708996622447
 PrefabInstance:
   m_ObjectHideFlags: 0
