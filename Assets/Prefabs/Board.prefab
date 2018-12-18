@@ -4110,6 +4110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b21bcf58dd51df42a24ce5b105d3679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boardToWorldTransform: {fileID: 3755586020118071946}
+  ships: []
 --- !u!1 &3755586020274131630
 GameObject:
   m_ObjectHideFlags: 0

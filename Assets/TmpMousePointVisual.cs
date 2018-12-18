@@ -16,12 +16,6 @@ public class TmpMousePointVisual : MonoBehaviour
     [SerializeField] private TextMesh[] textMeshesX;
     [SerializeField] private TextMesh[] textMeshesY;
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.TransformPoint(5, 0 , 5), transform.TransformVector(10, 0, 10));
-    }
-
     private void Awake()
     {
         camera = Camera.main;
