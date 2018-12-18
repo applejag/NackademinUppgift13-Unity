@@ -24,7 +24,11 @@ public class GameManager : MonoBehaviour
     public Button hostButton;
     public Button connectButton;
     public Button dcButton;
+    public Button startGameButton;
     public Button fireAtRandomButton;
+
+    [Space]
+    public BoardVisualizer boardVisualizer;
 
     private BattleGame game;
 
@@ -58,6 +62,9 @@ public class GameManager : MonoBehaviour
 
         fireAtRandomButton.interactable = game?.IsLocalsTurn == true;
         dcButton.interactable = game != null;
+        startGameButton.interactable = game?.GameState == GameState.Idle;
+
+        boardVisualizer.UpdateTheGrids(game);
     }
 
     public async void OnFireAtRandomButton()
@@ -164,6 +171,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public async void OnStartGameButton()
+    {
+        try
+        {
+            if (game != null) await game?.StartGameAsync();
+        }
+        catch (Exception e)
+        {
+            Log(e.Message, Color.red);
+            Debug.LogException(e);
+        }
+    }
+
     private void HookupGameEvents()
     {
         game.LocalPlayer.NameChanged += delegate
@@ -220,8 +240,15 @@ public class GameManager : MonoBehaviour
 
     private async void DisposeTheGame()
     {
-        if (game != null) await game.Disconnect();
-        game = null;
+        try
+        {
+            if (game != null) await game.Disconnect();
+        }
+        finally
+        {
+            game = null;
+        }
+
 
         Dispatcher.Invoke(delegate
         {
@@ -251,6 +278,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        game?.Disconnect();
         game?.Dispose();
     }
 }
