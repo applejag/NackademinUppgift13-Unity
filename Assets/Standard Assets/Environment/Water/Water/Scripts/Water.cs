@@ -81,8 +81,18 @@ namespace UnityStandardAssets.Water
             UpdateCameraModes(cam, reflectionCamera);
             UpdateCameraModes(cam, refractionCamera);
 
+
+            //avoid frustum error ugh
+            bool frustumError = false;
+            if (cam.transform.rotation.x == 0)
+                frustumError = true;
+            else if (cam.transform.rotation.y == 0)
+                frustumError = true;
+            else if (cam.transform.rotation.z == 0)
+                frustumError = true;
+
             // Render reflection if needed
-            if (mode >= WaterMode.Reflective)
+            if (mode >= WaterMode.Reflective && !frustumError)
             {
                 // Reflect camera around reflection plane
                 float d = -Vector3.Dot(normal, pos) - clipPlaneOffset;
