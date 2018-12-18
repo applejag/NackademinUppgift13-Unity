@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Button hostButton;
     public Button connectButton;
     public Button dcButton;
+    public Button startGameButton;
     public Button fireAtRandomButton;
 
     private BattleGame game;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
 
         fireAtRandomButton.interactable = game?.IsLocalsTurn == true;
         dcButton.interactable = game != null;
+        startGameButton.interactable = game?.GameState == GameState.Idle;
     }
 
     public async void OnFireAtRandomButton()
@@ -159,6 +161,19 @@ public class GameManager : MonoBehaviour
         {
             DisposeTheGame();
 
+            Log(e.Message, Color.red);
+            Debug.LogException(e);
+        }
+    }
+
+    public async void OnStartGameButton()
+    {
+        try
+        {
+            if (game != null) await game?.StartGameAsync();
+        }
+        catch (Exception e)
+        {
             Log(e.Message, Color.red);
             Debug.LogException(e);
         }
