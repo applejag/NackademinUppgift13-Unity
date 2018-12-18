@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 0}
   shipType: 2
+  offset: {x: 0, y: 0, z: 1.5}
 --- !u!65 &7922680618070788681
 BoxCollider:
   m_ObjectHideFlags: 0

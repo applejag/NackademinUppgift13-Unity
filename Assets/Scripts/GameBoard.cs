@@ -61,4 +61,17 @@ public class GameBoard : MonoBehaviour
     {
         return WorldToCoordinate(cam.ScreenToFlatWorldPoint(pos));
     }
+
+    public Vector3 OrientationToDirection(Orientation orientation)
+    {
+        if (orientation == Orientation.South)
+            return boardToWorldTransform.TransformDirection(Vector3.forward);
+
+        return boardToWorldTransform.TransformDirection(Vector3.right);
+    }
+
+    public Quaternion OrientationToRotation(Orientation orientation)
+    {
+        return Quaternion.LookRotation(OrientationToDirection(orientation), transform.up);
+    }
 }
