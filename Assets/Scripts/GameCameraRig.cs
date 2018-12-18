@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,8 +18,6 @@ public class GameCameraRig : MonoBehaviour
     private float dragRayOrigin;
 
     private float dragLastSpeed;
-
-    private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
 
     private void Awake()
     {
@@ -65,11 +64,7 @@ public class GameCameraRig : MonoBehaviour
 
     private void DragCamera()
     {
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (!groundPlane.Raycast(ray, out float distance))
-            return;
-
-        float rayPosition = ray.GetPoint(distance).z;
+        float rayPosition = camera.ScreenToFlatWorldPoint(Input.mousePosition).z;
 
         if (Input.GetMouseButtonDown(0))
         {
