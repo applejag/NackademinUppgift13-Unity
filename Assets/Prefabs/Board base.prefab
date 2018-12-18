@@ -2156,7 +2156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3755586019729225228
 Transform:
   m_ObjectHideFlags: 0
@@ -3616,7 +3616,7 @@ GameObject:
   - component: {fileID: 3755586020256317782}
   - component: {fileID: 3755586020121908086}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Board base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
