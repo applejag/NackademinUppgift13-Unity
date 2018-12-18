@@ -126,3 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef29fa2ae7ec684390c0af414ec0293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxZ: 250
+  minZ: 50
+  dragFalloff: 3.5
+  camera: {fileID: 0}
+  dragRayOrigin: 0
