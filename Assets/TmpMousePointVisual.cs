@@ -51,7 +51,6 @@ public class TmpMousePointVisual : MonoBehaviour
         if (plane.Raycast(ray, out float dist))
         {
             Vector2Int pos = GetWorldToBoard(ray.GetPoint(dist));
-            print(pos);
 
             if (Board.IsOnBoard(pos.x, pos.y))
             {
