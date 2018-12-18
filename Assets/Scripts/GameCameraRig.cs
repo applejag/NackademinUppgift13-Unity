@@ -25,6 +25,22 @@ public class GameCameraRig : MonoBehaviour
         camera = GetComponentInChildren<Camera>();
     }
 
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Vector3 position = transform.position;
+        Vector3 min = position;
+        Vector3 max = position;
+        min.z = minZ;
+        max.z = maxZ;
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(min, max);
+        Gizmos.DrawSphere(min, 1f);
+        Gizmos.DrawSphere(max, 1f);
+    }
+#endif
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
