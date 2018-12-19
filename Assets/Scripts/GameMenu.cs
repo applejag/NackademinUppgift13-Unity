@@ -31,6 +31,7 @@ public class GameMenu : MonoBehaviour
     public CanvasGroup groupHostGame;
     public CanvasGroup groupJoinGame;
     public CanvasGroup groupLoadingModalWithAbort;
+    public CanvasGroup groupErrorModalWithClose;
     public CanvasGroup groupGameStarted;
 
     [Header("Input references")]
@@ -43,10 +44,11 @@ public class GameMenu : MonoBehaviour
     public Text textPlayerName;
     public BoardShipPlacer shipPlacer;
     public Button buttonFinishMovingShips;
+    public Text textErrorMessage;
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         StartCoroutine(FadeInMenuCoroutine(groupBackground));
         yield return new WaitForSeconds(1);
         StartCoroutine(FadeInMenuCoroutine(groupPickName));
@@ -63,15 +65,15 @@ public class GameMenu : MonoBehaviour
 
     private IEnumerator FadeInMenuCoroutine(CanvasGroup canvasGroup)
     {
+        canvasGroup.blocksRaycasts = true;
+
         while ((canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 1, Time.deltaTime * fadeSpeed)) < fadingThreshold)
         {
             canvasGroup.interactable = canvasGroup.alpha > interactableThreshold;
-            canvasGroup.blocksRaycasts = canvasGroup.alpha > blockRaycastThreshold;
             yield return null;
         }
 
         canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
     }
 
@@ -101,6 +103,10 @@ public class GameMenu : MonoBehaviour
             FadeInMenu(groupPlayerNameLocal);
             shipPlacer.enabled = true;
         }
+        else
+        {
+            Menu_Error_Show("Please enter your name.");
+        }
     }
 
     public void Menu_PlaceYourShips_AllShipsMoved()
@@ -113,5 +119,11 @@ public class GameMenu : MonoBehaviour
         shipPlacer.enabled = false;
         FadeOutMenu(groupPlaceYourShips);
         FadeInMenu(groupNewGame);
+    }
+
+    public void Menu_Error_Show(string error)
+    {
+        textErrorMessage.text = error;
+        FadeInMenu(groupErrorModalWithClose);
     }
 }

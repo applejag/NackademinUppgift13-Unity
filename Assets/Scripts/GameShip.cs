@@ -20,7 +20,6 @@ public class GameShip : MonoBehaviour
 
     public Vector3 GetPositionOffset()
     {
-        int z = Mathf.CeilToInt(GetLength() / 2f);
         return transform.TransformVector(offset);
     }
 

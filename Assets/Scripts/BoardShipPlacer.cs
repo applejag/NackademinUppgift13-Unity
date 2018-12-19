@@ -130,7 +130,9 @@ public class BoardShipPlacer : MonoBehaviour
         int length = selectedShip.GetLength();
         int xLength = dragOrientation == Orientation.East ? length : 1;
         int yLength = dragOrientation == Orientation.South ? length : 1;
-        if (!Board.IsOnBoard(coordinate.x, coordinate.y) && !Board.IsOnBoard(coordinate.x + xLength - 1, coordinate.y + yLength - 1))
+        if (!justSelected &&
+            !Board.IsOnBoard(coordinate.x, coordinate.y) &&
+            !Board.IsOnBoard(coordinate.x + xLength - 1, coordinate.y + yLength - 1))
         {
             if (Input.GetMouseButtonDown(0))
                 dragOrientation = FlipOrientation(dragOrientation);
