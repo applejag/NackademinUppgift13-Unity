@@ -46,6 +46,9 @@ public class GameMenu : MonoBehaviour
     public Button buttonFinishMovingShips;
     public Text textErrorMessage;
 
+    [SerializeField, HideInInspector]
+    private HashSet<CanvasGroup> currentlyFading = new HashSet<CanvasGroup>();
+
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(0.2f);
@@ -63,8 +66,23 @@ public class GameMenu : MonoBehaviour
         StartCoroutine(FadeOutMenuCoroutine(canvasGroup));
     }
 
+    private bool TryLock(CanvasGroup canvasGroup)
+    {
+        return currentlyFading.Add(canvasGroup);
+    }
+
+    private bool Unlock(CanvasGroup canvasGroup)
+    {
+        return currentlyFading.Remove(canvasGroup);
+    }
+
     private IEnumerator FadeInMenuCoroutine(CanvasGroup canvasGroup)
     {
+        while (!TryLock(canvasGroup))
+            yield return null;
+
+        canvasGroup.GetComponent<MenuGroupEvents>()?.OnFadeInStart.Invoke();
+        canvasGroup.gameObject.SetActive(true);
         canvasGroup.blocksRaycasts = true;
 
         while ((canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 1, Time.deltaTime * fadeSpeed)) < fadingThreshold)
@@ -75,10 +93,17 @@ public class GameMenu : MonoBehaviour
 
         canvasGroup.interactable = true;
         canvasGroup.alpha = 1;
+        canvasGroup.GetComponent<MenuGroupEvents>()?.OnFadeInEnd.Invoke();
+
+        Unlock(canvasGroup);
     }
 
     private IEnumerator FadeOutMenuCoroutine(CanvasGroup canvasGroup)
     {
+        while (!TryLock(canvasGroup))
+            yield return null;
+
+        canvasGroup.GetComponent<MenuGroupEvents>()?.OnFadeOutStart.Invoke();
         canvasGroup.interactable = false;
         while ((canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, Time.deltaTime * fadeSpeed)) > 1 - fadingThreshold)
         {
@@ -88,8 +113,12 @@ public class GameMenu : MonoBehaviour
         
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
+        canvasGroup.gameObject.SetActive(false);
+        canvasGroup.GetComponent<MenuGroupEvents>()?.OnFadeOutEnd.Invoke();
+
+        Unlock(canvasGroup);
     }
-    
+
     public void Menu_PickName_SetPlayerName()
     {
         string playerName = fieldPlayerName.text.Trim();
@@ -106,6 +135,18 @@ public class GameMenu : MonoBehaviour
         else
         {
             Menu_Error_Show("Please enter your name.");
+        }
+    }
+
+    public void Menu_PickName_CancelSetName()
+    {
+        if (localPlayerName.Length == 0)        
+        {
+            Menu_Error_Show("Please enter your name.");
+        }
+        else
+        {
+            FadeOutMenu(groupPickName);
         }
     }
 

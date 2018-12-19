@@ -32,6 +32,7 @@ public class BoardShipPlacer : MonoBehaviour
 
     private bool justSelected;
 
+
 #if UNITY_EDITOR
     private List<GameShip> _editorQueueList;
     private void OnDrawGizmosSelected()
