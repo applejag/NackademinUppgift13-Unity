@@ -21,6 +21,7 @@ public class BoardShipPlacer : MonoBehaviour
     public float queueGapDescentSpeed = 2;
 
     public float raycastMaxDistance = 1000;
+    public float dragMinDistance = 0.9f;
 
     public UnityEvent allShipsPlaced;
 
@@ -29,6 +30,9 @@ public class BoardShipPlacer : MonoBehaviour
 
     [SerializeField, HideInInspector]
     private Orientation dragOrientation = Orientation.South;
+
+    [SerializeField, HideInInspector]
+    private Vector2Int dragOrigin;
 
     private bool justSelected;
 
@@ -112,6 +116,9 @@ public class BoardShipPlacer : MonoBehaviour
         selectedShip = gameShip;
         dragOrientation = gameShip.GetShip().Orientation;
         justSelected = true;
+        dragOrigin = gameShip.GetBoardCoordinateFromPosition();
+
+        Debug.DrawRay(board.CoordinateToWorld(dragOrigin), Vector3.up * 10, Color.red, 5);
     }
 
     private void PlaceTheShip()
@@ -141,13 +148,17 @@ public class BoardShipPlacer : MonoBehaviour
             return;
         }
 
+        // Continue if mouse release
         if (!Input.GetMouseButtonUp(0))
             return;
 
         if (justSelected)
         {
             justSelected = false;
-            return;
+
+            // Dragged it long enough
+            if ((coordinate - dragOrigin).magnitude < dragMinDistance)
+                return;
         }
 
         try

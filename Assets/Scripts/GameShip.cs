@@ -18,6 +18,11 @@ public class GameShip : MonoBehaviour
         transform.position = world + GetPositionOffset();
     }
 
+    public Vector2Int GetBoardCoordinateFromPosition()
+    {
+        return board.WorldToCoordinate(transform.position - GetPositionOffset());
+    }
+
     public Vector3 GetPositionOffset()
     {
         return transform.TransformVector(offset);
