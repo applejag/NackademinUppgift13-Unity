@@ -71,6 +71,8 @@ public class GameMenu : MonoBehaviour
 
     private Dictionary<CanvasGroup, CancellationTokenSource> currentlyFading = new Dictionary<CanvasGroup, CancellationTokenSource>();
 
+    private bool connectCancelByTimeout = true;
+
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(0.2f);
@@ -237,6 +239,7 @@ public class GameMenu : MonoBehaviour
 
         Menu_Loading_Show(joiningGameText);
 
+        connectCancelByTimeout = true;
         gameManager.JoinGame(address, port, localPlayerName)
             .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while connecting to game:"));
     }
@@ -255,6 +258,7 @@ public class GameMenu : MonoBehaviour
 
     public void Menu_Loading_Abort()
     {
+        connectCancelByTimeout = false;
         gameManager.CancelConnect();
         FadeOutMenu(groupLoadingModalWithAbort);
     }
@@ -265,6 +269,7 @@ public class GameMenu : MonoBehaviour
 
         Menu_Loading_Show(waitingForPlayerText);
 
+        connectCancelByTimeout = true;
         gameManager.HostGame(port, localPlayerName)
             .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while hosting game:"));
     }
@@ -274,11 +279,15 @@ public class GameMenu : MonoBehaviour
         if (task.IsFaulted || task.IsCanceled)
         {
             FadeOutMenu(groupLoadingModalWithAbort);
-
+            
             if (task.Exception != null)
             {
                 Menu_Error_Show(task.Exception, errorTitle);
                 gameManager.CancelConnect();
+            }
+            else if (connectCancelByTimeout)
+            {
+                Menu_Error_Show("Connection timed out.");
             }
 
             return;

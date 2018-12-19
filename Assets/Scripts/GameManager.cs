@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public async Task JoinGame(string address, ushort port, string localPlayerName)
     {
-        connectCancellationToken = new CancellationTokenSource();
+        connectCancellationToken = new CancellationTokenSource(millisecondsDelay: 10000);
 
         game = await BattleGame.ConnectAsync(new ConnectionSettings
         {
