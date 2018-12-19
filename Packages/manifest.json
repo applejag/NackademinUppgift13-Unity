@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.jillejr.battleshipprotocol": "https://github.com/jilleJr/NackademinUppgift13-Protocol.git#1.1.0",
+    "com.jillejr.battleshipprotocol": "https://github.com/jilleJr/NackademinUppgift13-Protocol.git#1.2.0",
     "com.unity.analytics": "3.2.2",
     "com.unity.collab-proxy": "1.2.15",
     "com.unity.incrementalcompiler": "0.0.42-preview.30",
@@ -39,8 +39,8 @@
   },
   "lock": {
     "com.jillejr.battleshipprotocol": {
-      "hash": "07116e2c76ea32319d42ce563cd2e80dbc0eee4a",
-      "revision": "1.1.0"
+      "hash": "782e9d8875bc89ff7070598be3d83c7ca51f1f61",
+      "revision": "1.2.0"
     }
   }
 }
