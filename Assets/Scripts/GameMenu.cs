@@ -278,6 +278,7 @@ public class GameMenu : MonoBehaviour
             if (task.Exception != null)
             {
                 Menu_Error_Show(task.Exception, errorTitle);
+                gameManager.CancelConnect();
             }
 
             return;
