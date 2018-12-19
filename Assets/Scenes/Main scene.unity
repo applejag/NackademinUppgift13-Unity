@@ -6270,8 +6270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130, y: -108.481544}
-  m_SizeDelta: {x: 240, y: 30.889235}
+  m_AnchoredPosition: {x: 130, y: -108.58115}
+  m_SizeDelta: {x: 240, y: 31.486881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597979467
 MonoBehaviour:
@@ -6306,7 +6306,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Doing some important work here. Please be patient.
+  m_Text: 'Doing some important work here.
+
+    Please be patient.'
 --- !u!222 &1597979468
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6686,7 +6688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -151.96307}
+  m_AnchoredPosition: {x: 250, y: -152.1623}
   m_SizeDelta: {x: 240, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1671615491
@@ -7582,7 +7584,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920410443}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
