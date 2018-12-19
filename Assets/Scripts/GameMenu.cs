@@ -60,7 +60,10 @@ public class GameMenu : MonoBehaviour
     public InputField fieldJoinPort;
 
     [Header("Specific elements")]
-    public Text textPlayerName;
+    [FormerlySerializedAs("textPlayerName")]
+    public Text textPlayerLocalName;
+    public Text textPlayerRemoteName;
+    public Button buttonPlayerNameChange;
     public Button buttonFinishMovingShips;
     public Text textErrorMessage;
     public Text textLoadingHeader;
@@ -155,7 +158,7 @@ public class GameMenu : MonoBehaviour
         string playerName = fieldPlayerName.text.Trim();
         if (playerName.Length > 0)
         {
-            textPlayerName.text = localPlayerName = playerName;
+            textPlayerLocalName.text = localPlayerName = playerName;
             FadeOutMenu(groupBackground);
             FadeOutMenu(groupPickName);
             FadeInMenu(groupPlaceYourShips);
@@ -281,7 +284,16 @@ public class GameMenu : MonoBehaviour
             return;
         }
 
+        // Disable changing name f'goodie sake
+        buttonPlayerNameChange.gameObject.SetActive(false);
+
         gameManager.game.GameStateChanged += delegate { Dispatcher.Invoke(HandleGameState, gameManager.game); };
+        gameManager.game.RemotePlayer.NameChanged += delegate { Dispatcher.Invoke(() =>
+        {
+            textPlayerRemoteName.text = gameManager.game.RemotePlayer.Name;
+            FadeInMenu(groupPlayerNameRemote);
+        }); };
+
         HandleGameState(gameManager.game);
     }
 
@@ -308,6 +320,7 @@ public class GameMenu : MonoBehaviour
                 FadeInMenu(groupGameStarted);
                 textGameStartedTurn.text = game.IsLocalsTurn ? ourTurnText : theirTurnText;
                 FadeOutMenu(groupJoinGame);
+                FadeOutMenu(groupJoinClientStartGame);
                 FadeOutMenu(groupHostGame);
                 FadeOutMenu(groupLoadingModalWithAbort);
                 break;
