@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BattleshipProtocol.Game;
 using Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameBoard : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class GameBoard : MonoBehaviour
     public List<GameShip> ships;
     public Board protocolBoard = new Board();
 
+    [SerializeField, HideInInspector]
     private Camera cam;
 
     private void Awake()

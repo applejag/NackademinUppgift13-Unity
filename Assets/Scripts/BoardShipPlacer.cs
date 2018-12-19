@@ -5,6 +5,7 @@ using System.Linq;
 using BattleshipProtocol.Game;
 using Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoardShipPlacer : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class BoardShipPlacer : MonoBehaviour
     public float queueGapDescentSpeed = 2;
 
     public float raycastMaxDistance = 1000;
+
+    public UnityEvent allShipsPlaced;
 
     [SerializeField, HideInInspector]
     private Camera cam;
@@ -118,6 +121,8 @@ public class BoardShipPlacer : MonoBehaviour
         Vector3 rayPosition = cam.ScreenToFlatWorldPoint(Input.mousePosition);
         Vector3 offset = selectedShip.GetPositionOffset();
         Vector2Int coordinate = board.WorldToCoordinate(rayPosition - offset);
+        Debug.DrawRay(rayPosition, Vector3.up * 5);
+        Debug.DrawRay(rayPosition, offset * 15);
 
         selectedShip.SetPositionFromCoordinate(coordinate, dragOrientation, 10);
 
@@ -153,10 +158,15 @@ public class BoardShipPlacer : MonoBehaviour
 
         // Move queue
         if (queueList.Remove(selectedShip))
+        {
             queueGapLeft = queueGap;
 
+            if (queueList.Count == 0)
+                allShipsPlaced.Invoke();
+        }
+
         selectedShip.SetPositionFromCoordinate(coordinate, dragOrientation);
-        print($"moved {selectedShip.name} to {coordinate}");
+        print($"moved {selectedShip.name} to {coordinate}, {dragOrientation}");
         selectedShip = null;
     }
 

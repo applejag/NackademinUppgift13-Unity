@@ -4419,7 +4419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3755586020510270802
 Transform:
   m_ObjectHideFlags: 0
@@ -4577,6 +4577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrier
       objectReference: {fileID: 0}
+    - target: {fileID: 4004103121678325736, guid: eab10192dab67994ab9ad4a58cc91519,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4004103121678420936, guid: eab10192dab67994ab9ad4a58cc91519,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4669,6 +4674,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
+    - target: {fileID: 1401059629779113026, guid: f3cb4e9e71b53c341bccdefea2a28248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6750274748301790484, guid: f3cb4e9e71b53c341bccdefea2a28248,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4760,6 +4770,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Destroyer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860428835628056035, guid: 3de9f01fb251b0f45baa73f6c9fadd92,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8489876219011206723, guid: 3de9f01fb251b0f45baa73f6c9fadd92,
         type: 3}
@@ -4999,6 +5014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patrol boat
       objectReference: {fileID: 0}
+    - target: {fileID: 1789089780543266869, guid: a08bd0de74085e248992248bdc08e2fa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6263217934898925892, guid: a08bd0de74085e248992248bdc08e2fa,
         type: 3}
       propertyPath: board
@@ -5035,6 +5055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Battleship
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952426612921632906, guid: 3d5650972ea2d044ea0f16f899af1c94,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1469247744304212496, guid: 3d5650972ea2d044ea0f16f899af1c94,
         type: 3}

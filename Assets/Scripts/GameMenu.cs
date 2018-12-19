@@ -39,8 +39,10 @@ public class GameMenu : MonoBehaviour
     public InputField fieldJoinAddress;
     public InputField fieldJoinPort;
 
-    [Header("Text elements")]
+    [Header("Specific elements")]
     public Text textPlayerName;
+    public BoardShipPlacer shipPlacer;
+    public Button buttonFinishMovingShips;
 
     private IEnumerator Start()
     {
@@ -97,6 +99,19 @@ public class GameMenu : MonoBehaviour
             FadeInMenu(groupPlaceYourShips);
             FadeInMenu(groupPlayerNamePanel);
             FadeInMenu(groupPlayerNameLocal);
+            shipPlacer.enabled = true;
         }
+    }
+
+    public void Menu_PlaceYourShips_AllShipsMoved()
+    {
+        buttonFinishMovingShips.interactable = true;
+    }
+
+    public void Menu_PlaceYourShips_FinishedButton()
+    {
+        shipPlacer.enabled = false;
+        FadeOutMenu(groupPlaceYourShips);
+        FadeInMenu(groupNewGame);
     }
 }
