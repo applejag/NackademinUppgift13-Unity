@@ -152,7 +152,7 @@ PlayerSettings:
     Standalone: com.jilleJr.Battleship
   buildNumber: {}
   AndroidBundleVersionCode: 3
-  AndroidMinSdkVersion: 16
+  AndroidMinSdkVersion: 25
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
