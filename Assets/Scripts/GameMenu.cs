@@ -42,7 +42,6 @@ public class GameMenu : MonoBehaviour
 
     [Header("Specific elements")]
     public Text textPlayerName;
-    public BoardShipPlacer shipPlacer;
     public Button buttonFinishMovingShips;
     public Text textErrorMessage;
 
@@ -130,7 +129,6 @@ public class GameMenu : MonoBehaviour
             FadeInMenu(groupPlaceYourShips);
             FadeInMenu(groupPlayerNamePanel);
             FadeInMenu(groupPlayerNameLocal);
-            shipPlacer.enabled = true;
         }
         else
         {
@@ -157,7 +155,6 @@ public class GameMenu : MonoBehaviour
 
     public void Menu_PlaceYourShips_FinishedButton()
     {
-        shipPlacer.enabled = false;
         FadeOutMenu(groupPlaceYourShips);
         FadeInMenu(groupNewGame);
     }
