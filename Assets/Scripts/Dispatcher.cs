@@ -29,4 +29,34 @@ public class Dispatcher : MonoBehaviour
     {
         _singleton.actions.Add(action);
     }
+
+    public static void Invoke<T>(Action<T> action, T param1)
+    {
+        _singleton.actions.Add(() => { action(param1); });
+    }
+
+    public static void Invoke<T1, T2>(Action<T1, T2> action, T1 param1, T2 param2)
+    {
+        _singleton.actions.Add(() => { action(param1, param2); });
+    }
+
+    public static void Invoke<T1, T2, T3>(Action<T1, T2, T3> action, T1 param1, T2 param2, T3 param3)
+    {
+        _singleton.actions.Add(() => { action(param1, param2, param3); });
+    }
+
+    public static void Invoke<T>(Func<T> action)
+    {
+        _singleton.actions.Add(() => { action(); });
+    }
+
+    public static void Invoke<T1, T>(Func<T1, T> action, T1 param1)
+    {
+        _singleton.actions.Add(() => { action(param1); });
+    }
+
+    public static void Invoke<T1, T2, T3, T>(Func<T1, T2, T3, T> action, T1 param1, T2 param2, T3 param3)
+    {
+        _singleton.actions.Add(() => { action(param1, param2, param3); });
+    }
 }
