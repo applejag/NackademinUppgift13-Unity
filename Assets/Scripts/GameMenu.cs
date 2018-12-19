@@ -358,6 +358,12 @@ public class GameMenu : MonoBehaviour
             return false;
         }
 
+        if (result == 0)
+        {
+            Menu_Error_Show("Sorry, but port must be bigger than 0.");
+            return false;
+        }
+
         port = (ushort)result;
         return true;
     }
