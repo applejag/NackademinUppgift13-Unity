@@ -63,7 +63,6 @@ public class GameMenu : MonoBehaviour
     [FormerlySerializedAs("textPlayerName")]
     public Text textPlayerLocalName;
     public Text textPlayerRemoteName;
-    public Button buttonPlayerNameChange;
     public Button buttonFinishMovingShips;
     public Text textErrorMessage;
     public Text textLoadingHeader;
@@ -283,9 +282,6 @@ public class GameMenu : MonoBehaviour
 
             return;
         }
-
-        // Disable changing name f'goodie sake
-        buttonPlayerNameChange.gameObject.SetActive(false);
 
         gameManager.game.GameStateChanged += delegate { Dispatcher.Invoke(HandleGameState, gameManager.game); };
         gameManager.game.RemotePlayer.NameChanged += delegate { Dispatcher.Invoke(() =>
