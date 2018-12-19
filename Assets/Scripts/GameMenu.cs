@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -196,6 +197,30 @@ public class GameMenu : MonoBehaviour
         FadeInMenu(groupErrorModalWithClose);
     }
 
+    public void Menu_Error_Show(Exception error, string errorTitle)
+    {
+        switch (error)
+        {
+            case null:
+                return;
+            case AggregateException multiple:
+                List<Exception> innerExceptions = multiple.InnerExceptions.ToList();
+                if (innerExceptions.Count == 1)
+                {
+                    error = innerExceptions[0];
+                    goto default;
+                }
+                Menu_Error_Show($"{errorTitle}\n{string.Join("\n", innerExceptions.Select(e => "- " + e.Message))}");
+                break;
+
+            default:
+                Menu_Error_Show($"{errorTitle}\n{error.Message}");
+                break;
+        }
+
+        Debug.LogException(error, this);
+    }
+
     public void Menu_Loading_Show(string header, bool withAbortButton = true)
     {
         textLoadingHeader.text = header;
@@ -222,7 +247,7 @@ public class GameMenu : MonoBehaviour
             .ContinueWith(Dispatcher.Wrap<Task>(task =>
             {
                 FadeOutMenu(groupLoadingModalWithAbort);
-                Menu_Error_Show($"Error while starting game:\n{task.Exception?.Message ?? "null"}");
+                Menu_Error_Show(task.Exception, "Error while starting game:");
             }), TaskContinuationOptions.OnlyOnFaulted);
     }
 
@@ -250,8 +275,7 @@ public class GameMenu : MonoBehaviour
 
             if (task.Exception != null)
             {
-                Menu_Error_Show($"{errorTitle}\n{task.Exception?.Message}");
-                Debug.LogException(task.Exception, this);
+                Menu_Error_Show(task.Exception, errorTitle);
             }
 
             return;
