@@ -6,7 +6,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using BattleshipProtocol;
+using BattleshipProtocol.Protocol;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
@@ -17,6 +20,14 @@ public class GameMenu : MonoBehaviour
     public GameManager gameManager;
 
     [Header("Settings")]
+    public string joiningGameText = "CONNECTING…";
+    public string waitingForPlayerText = "WAITING FOR PLAYER…";
+    public string waitingForHandshakeText = "WAITING FOR HANDSHAKE…";
+    public string waitingForStartText = "WAITING FOR CLIENT TO START…";
+    public string waitingForTurnText = "WAITING FOR HOST TO PICK TURN…";
+    public string ourTurnText = "YOUR TURN";
+    public string theirTurnText = "THEIR TURN";
+    [Space]
     public float fadeSpeed = 3;
     [Range(0, 1)]
     public float interactableThreshold = 0.9f;
@@ -36,6 +47,7 @@ public class GameMenu : MonoBehaviour
     public CanvasGroup groupNewGame;
     public CanvasGroup groupHostGame;
     public CanvasGroup groupJoinGame;
+    public CanvasGroup groupJoinClientStartGame;
     public CanvasGroup groupLoadingModalWithAbort;
     public CanvasGroup groupErrorModalWithClose;
     public CanvasGroup groupGameStarted;
@@ -51,6 +63,8 @@ public class GameMenu : MonoBehaviour
     public Button buttonFinishMovingShips;
     public Text textErrorMessage;
     public Text textLoadingHeader;
+    public Button buttonLoadingAbort;
+    public Text textGameStartedTurn;
 
     private Dictionary<CanvasGroup, CancellationTokenSource> currentlyFading = new Dictionary<CanvasGroup, CancellationTokenSource>();
 
@@ -182,9 +196,10 @@ public class GameMenu : MonoBehaviour
         FadeInMenu(groupErrorModalWithClose);
     }
 
-    public void Menu_Loading_Show(string header)
+    public void Menu_Loading_Show(string header, bool withAbortButton = true)
     {
         textLoadingHeader.text = header;
+        buttonLoadingAbort.gameObject.SetActive(withAbortButton);
         FadeInMenu(groupLoadingModalWithAbort);
     }
 
@@ -193,29 +208,22 @@ public class GameMenu : MonoBehaviour
         if (!TryGetAddressField(fieldJoinAddress, out string address)) return;
         if (!TryGetPortField(fieldJoinPort, out ushort port)) return;
 
-        Menu_Loading_Show("CONNECTING…");
+        Menu_Loading_Show(joiningGameText);
 
         gameManager.JoinGame(address, port, localPlayerName)
-            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while connecting to game."));
+            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while connecting to game:"));
     }
 
-    private void HandleGameConnectResult(Task task, string errorTitle)
+    public void Menu_JoinClientStart_Start()
     {
-        Debug.Log("I got a continuation!");
-        FadeOutMenu(groupLoadingModalWithAbort);
+        Menu_Loading_Show(waitingForTurnText, withAbortButton: false);
 
-        if (task.IsFaulted || task.IsCanceled)
-        {
-            if (task.Exception != null)
-                Menu_Error_Show($"{errorTitle}\n{task.Exception?.Message}");
-        }
-        else
-        {
-            print(gameManager.game?.GameState);
-            FadeInMenu(groupGameStarted);
-            FadeOutMenu(groupJoinGame);
-            FadeOutMenu(groupHostGame);
-        }
+        gameManager.game.StartGameAsync()
+            .ContinueWith(Dispatcher.Wrap<Task>(task =>
+            {
+                FadeOutMenu(groupLoadingModalWithAbort);
+                Menu_Error_Show($"Error while starting game:\n{task.Exception?.Message ?? "null"}");
+            }), TaskContinuationOptions.OnlyOnFaulted);
     }
 
     public void Menu_Loading_Abort()
@@ -228,10 +236,58 @@ public class GameMenu : MonoBehaviour
     {
         if (!TryGetPortField(fieldHostPort, out ushort port)) return;
 
-        Menu_Loading_Show("WAITING FOR PLAYER…");
+        Menu_Loading_Show(waitingForPlayerText);
 
         gameManager.HostGame(port, localPlayerName)
-            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while hosting game."));
+            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while hosting game:"));
+    }
+
+    private void HandleGameConnectResult(Task task, string errorTitle)
+    {
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            FadeOutMenu(groupLoadingModalWithAbort);
+
+            if (task.Exception != null)
+            {
+                Menu_Error_Show($"{errorTitle}\n{task.Exception?.Message}");
+                Debug.LogException(task.Exception, this);
+            }
+
+            return;
+        }
+
+        gameManager.game.GameStateChanged += delegate { Dispatcher.Invoke(HandleGameState, gameManager.game); };
+        HandleGameState(gameManager.game);
+    }
+
+    public void HandleGameState(BattleGame game)
+    {
+        switch (game.GameState)
+        {
+            case GameState.Handshake:
+                Menu_Loading_Show(waitingForHandshakeText);
+                break;
+
+            case GameState.Idle when game.IsHost:
+                Menu_Loading_Show(waitingForStartText);
+                break;
+
+            case GameState.Idle when game.IsHost == false:
+                FadeInMenu(groupJoinClientStartGame);
+                FadeOutMenu(groupHostGame);
+                FadeOutMenu(groupJoinGame);
+                FadeOutMenu(groupLoadingModalWithAbort);
+                break;
+
+            case GameState.InGame:
+                FadeInMenu(groupGameStarted);
+                textGameStartedTurn.text = game.IsLocalsTurn ? ourTurnText : theirTurnText;
+                FadeOutMenu(groupJoinGame);
+                FadeOutMenu(groupHostGame);
+                FadeOutMenu(groupLoadingModalWithAbort);
+                break;
+        }
     }
 
     private bool TryGetAddressField(InputField field, out string address)
