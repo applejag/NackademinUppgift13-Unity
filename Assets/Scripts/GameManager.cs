@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
             Address = address,
             Port = port
         }, board.protocolBoard, localPlayerName, connectCancellationToken.Token);
+
+        print("CLIENT CONNECTED WITH " + game.RemotePlayer.EndPoint);
     }
 
     public void CancelConnect()
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
         {
             Port = port
         }, board.protocolBoard, localPlayerName, hostCancellationTokenSource.Token);
+
+        print("HOST CONNECTED WITH " + game.RemotePlayer.EndPoint);
     }
 
     private void OnEnable()

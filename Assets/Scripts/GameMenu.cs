@@ -196,28 +196,32 @@ public class GameMenu : MonoBehaviour
         Menu_Loading_Show("CONNECTING…");
 
         gameManager.JoinGame(address, port, localPlayerName)
-            .ContinueWith(task => HandleGameConnectResult(task, "Error while connecting to game."));
+            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while connecting to game."));
     }
 
     private void HandleGameConnectResult(Task task, string errorTitle)
     {
-        Dispatcher.Invoke(FadeOutMenu, groupLoadingModalWithAbort);
+        Debug.Log("I got a continuation!");
+        FadeOutMenu(groupLoadingModalWithAbort);
 
         if (task.IsFaulted || task.IsCanceled)
         {
             if (task.Exception != null)
-                Dispatcher.Invoke(Menu_Error_Show, $"{errorTitle}\n{task.Exception?.Message}");
+                Menu_Error_Show($"{errorTitle}\n{task.Exception?.Message}");
         }
         else
         {
             print(gameManager.game?.GameState);
-            Dispatcher.Invoke(FadeInMenu, groupGameStarted);
+            FadeInMenu(groupGameStarted);
+            FadeOutMenu(groupJoinGame);
+            FadeOutMenu(groupHostGame);
         }
     }
 
     public void Menu_Loading_Abort()
     {
         gameManager.CancelConnect();
+        FadeOutMenu(groupLoadingModalWithAbort);
     }
 
     public void Menu_HostGame_Host()
@@ -227,7 +231,7 @@ public class GameMenu : MonoBehaviour
         Menu_Loading_Show("WAITING FOR PLAYER…");
 
         gameManager.HostGame(port, localPlayerName)
-            .ContinueWith(task => HandleGameConnectResult(task, "Error while hosting game."));
+            .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while hosting game."));
     }
 
     private bool TryGetAddressField(InputField field, out string address)
