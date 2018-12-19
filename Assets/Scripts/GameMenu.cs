@@ -86,7 +86,6 @@ public class GameMenu : MonoBehaviour
         canvasGroup.alpha = 0;
     }
     
-    
     public void Menu_PickName_SetPlayerName()
     {
         string playerName = fieldPlayerName.text.Trim();

@@ -47,7 +47,7 @@ MonoBehaviour:
   selectedShip: {fileID: 0}
   queuePivot: {fileID: 741025839184476543}
   queueList: []
-  queueGap: 20
+  queueGap: 40
   queueGapLeft: 0
   queueGapDescentSpeed: 5
   raycastMaxDistance: 1000
@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 3728488024706425848, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.539997
+      value: -51.04
       objectReference: {fileID: 0}
     - target: {fileID: 3728488024706425848, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
@@ -176,7 +176,7 @@ PrefabInstance:
     - target: {fileID: 8800348275960958547, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.539997
+      value: -53.04
       objectReference: {fileID: 0}
     - target: {fileID: 8800348275960958547, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
@@ -201,7 +201,7 @@ PrefabInstance:
     - target: {fileID: 7697693606405605784, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.539999
+      value: -55.04
       objectReference: {fileID: 0}
     - target: {fileID: 7697693606405605784, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
@@ -226,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 6508932078076655099, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.54
+      value: -57.04
       objectReference: {fileID: 0}
     - target: {fileID: 6508932078076655099, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
@@ -251,7 +251,7 @@ PrefabInstance:
     - target: {fileID: 4261825057161269634, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.54
+      value: -59.04
       objectReference: {fileID: 0}
     - target: {fileID: 4261825057161269634, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
