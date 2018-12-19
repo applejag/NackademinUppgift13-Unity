@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -192,23 +193,26 @@ public class GameMenu : MonoBehaviour
         if (!TryGetAddressField(fieldJoinAddress, out string address)) return;
         if (!TryGetPortField(fieldJoinPort, out ushort port)) return;
 
-        FadeInMenu(groupLoadingModalWithAbort);
+        Menu_Loading_Show("CONNECTING…");
 
         gameManager.JoinGame(address, port, localPlayerName)
-            .ContinueWith(task =>
-            {
-                Dispatcher.Invoke(FadeOutMenu, groupLoadingModalWithAbort);
+            .ContinueWith(task => HandleGameConnectResult(task, "Error while connecting to game."));
+    }
 
-                if (task.IsFaulted || task.IsCanceled)
-                {
-                    if (task.Exception != null)
-                        Dispatcher.Invoke(Menu_Error_Show, $"Error while connecting to game.\n{task.Exception?.Message}");
-                }
-                else
-                {
-                    Dispatcher.Invoke(FadeInMenu, groupGameStarted);
-                }
-            });
+    private void HandleGameConnectResult(Task task, string errorTitle)
+    {
+        Dispatcher.Invoke(FadeOutMenu, groupLoadingModalWithAbort);
+
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            if (task.Exception != null)
+                Dispatcher.Invoke(Menu_Error_Show, $"{errorTitle}\n{task.Exception?.Message}");
+        }
+        else
+        {
+            print(gameManager.game?.GameState);
+            Dispatcher.Invoke(FadeInMenu, groupGameStarted);
+        }
     }
 
     public void Menu_Loading_Abort()
@@ -218,26 +222,12 @@ public class GameMenu : MonoBehaviour
 
     public void Menu_HostGame_Host()
     {
-        if (!TryGetAddressField(fieldJoinAddress, out string address)) return;
-        if (!TryGetPortField(fieldJoinPort, out ushort port)) return;
+        if (!TryGetPortField(fieldHostPort, out ushort port)) return;
 
-        FadeInMenu(groupLoadingModalWithAbort);
+        Menu_Loading_Show("WAITING FOR PLAYER…");
 
-        gameManager.JoinGame(address, port, localPlayerName)
-            .ContinueWith(task =>
-            {
-                Dispatcher.Invoke(FadeOutMenu, groupLoadingModalWithAbort);
-
-                if (task.IsFaulted || task.IsCanceled)
-                {
-                    if (task.Exception != null)
-                        Dispatcher.Invoke(Menu_Error_Show, $"Error while connecting to game.\n{task.Exception?.Message}");
-                }
-                else
-                {
-                    Dispatcher.Invoke(FadeInMenu, groupGameStarted);
-                }
-            });
+        gameManager.HostGame(port, localPlayerName)
+            .ContinueWith(task => HandleGameConnectResult(task, "Error while hosting game."));
     }
 
     private bool TryGetAddressField(InputField field, out string address)
@@ -257,7 +247,7 @@ public class GameMenu : MonoBehaviour
 
     private bool TryGetPortField(InputField field, out ushort port)
     {
-        port = default;
+        port = default(ushort);
         string input = field.text.Trim();
 
         if (string.IsNullOrEmpty(input))

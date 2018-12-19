@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         game = null;
     }
 
-    public async Task HostGame(ushort port, string playerName, string localPlayerName)
+    public async Task HostGame(ushort port, string localPlayerName)
     {
         if (hostCancellationTokenSource != null)
             throw new InvalidOperationException("Game is already hosting.");
