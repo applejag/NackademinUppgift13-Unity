@@ -53,6 +53,9 @@ public class GameMenu : MonoBehaviour
     public CanvasGroup groupErrorModalWithClose;
     public CanvasGroup groupGameStarted;
     public CanvasGroup groupDisconnected;
+    public CanvasGroup groupInGame;
+    public CanvasGroup groupInGameOurTurn;
+    public CanvasGroup groupInGameTheirTurn;
 
     [Header("Input references")]
     public InputField fieldPlayerName;
@@ -228,7 +231,12 @@ public class GameMenu : MonoBehaviour
         Debug.LogException(error, this);
     }
 
-    public void Menu_Loading_Show(string header, bool withAbortButton = true)
+    public void Menu_Loading_Show(string header)
+    {
+        Menu_Loading_Show(header, true);
+    }
+
+    public void Menu_Loading_Show(string header, bool withAbortButton)
     {
         textLoadingHeader.text = header;
         buttonLoadingAbort.gameObject.SetActive(withAbortButton);
@@ -290,6 +298,9 @@ public class GameMenu : MonoBehaviour
         FadeOutMenu(groupErrorModalWithClose);
         FadeOutMenu(groupGameStarted);
         FadeOutMenu(groupDisconnected);
+        FadeOutMenu(groupInGame);
+        FadeOutMenu(groupInGameOurTurn);
+        FadeOutMenu(groupInGameTheirTurn);
 
         FadeInMenu(groupPlaceYourShips);
     }
@@ -321,8 +332,23 @@ public class GameMenu : MonoBehaviour
             textPlayerRemoteName.text = gameManager.game.RemotePlayer.Name;
             FadeInMenu(groupPlayerNameRemote);
         }); };
+        gameManager.game.LocalsTurnChanged += delegate { Dispatcher.Invoke(ShowCorrectTurnMenu); };
 
         HandleGameState(gameManager.game);
+    }
+
+    public void ShowCorrectTurnMenu()
+    {
+        if (gameManager.game.IsLocalsTurn)
+        {
+            FadeInMenu(groupInGameOurTurn);
+            FadeOutMenu(groupInGameTheirTurn);
+        }
+        else
+        {
+            FadeInMenu(groupInGameTheirTurn);
+            FadeOutMenu(groupInGameOurTurn);
+        }
     }
 
     public void HandleGameState(BattleGame game)
