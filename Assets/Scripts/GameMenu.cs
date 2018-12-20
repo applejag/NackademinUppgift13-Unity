@@ -73,7 +73,8 @@ public class GameMenu : MonoBehaviour
     public Button buttonLoadingAbort;
     public Text textGameStartedTurn;
 
-    private Dictionary<CanvasGroup, CancellationTokenSource> currentlyFading = new Dictionary<CanvasGroup, CancellationTokenSource>();
+    private readonly Dictionary<CanvasGroup, CancellationTokenSource> currentlyFading =
+        new Dictionary<CanvasGroup, CancellationTokenSource>();
 
     private bool connectCancelByTimeout = true;
 

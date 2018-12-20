@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Extensions;
+﻿using Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameCameraRig : MonoBehaviour
 {
+    public GameShootingThing shooter;
+
     public float maxZ = 250;
     public float minZ = 50;
 
@@ -42,6 +41,9 @@ public class GameCameraRig : MonoBehaviour
 
     private void Update()
     {
+        if (shooter != null && shooter.iWantTheFocus)
+            return;
+
         if (Input.GetMouseButton(0))
         {
             DragCamera();
@@ -50,7 +52,6 @@ public class GameCameraRig : MonoBehaviour
         {
             PostDragCamera();
         }
-
     }
 
     private void PostDragCamera()

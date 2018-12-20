@@ -113,6 +113,9 @@ public class BoardShipPlacer : MonoBehaviour
         if (gameShip is null)
             return;
 
+        if (gameShip.board != board)
+            return;
+
         selectedShip = gameShip;
         dragOrientation = gameShip.GetShip().Orientation;
         justSelected = true;
