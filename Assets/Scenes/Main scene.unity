@@ -6634,7 +6634,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346028874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1829362983}
+        m_MethodName: Fire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1346028874
@@ -10334,6 +10345,10 @@ PrefabInstance:
       propertyPath: textFireButton
       value: 
       objectReference: {fileID: 230331316}
+    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
+      propertyPath: buttonFireButton
+      value: 
+      objectReference: {fileID: 1346028873}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
 --- !u!1001 &781379886319203712
@@ -10519,6 +10534,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1174177700451953287, guid: 30e8a217fc6fc114c98275cafcb7e296,
+        type: 3}
+      propertyPath: shooter
+      value: 
+      objectReference: {fileID: 1829362983}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30e8a217fc6fc114c98275cafcb7e296, type: 3}
 --- !u!1001 &8196154015556191989

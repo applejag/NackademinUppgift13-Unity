@@ -22,6 +22,9 @@ public class GameShootingThing : MonoBehaviour
     [SerializeField, HideInInspector]
     private Vector2Int selectedCoordinate;
 
+    [HideInInspector]
+    public bool iWantTheFocus;
+
     private void Awake()
     {
         camera = Camera.main;
@@ -34,6 +37,11 @@ public class GameShootingThing : MonoBehaviour
         selectedCoordinate = new Vector2Int(-1, -1);
     }
 
+    private void OnDisable()
+    {
+        iWantTheFocus = false;
+    }
+
     public string FormatString(Vector2Int coordinate)
     {
         return Board.IsOnBoard(coordinate.x, coordinate.y)
@@ -43,11 +51,20 @@ public class GameShootingThing : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonUp(0))
+        {
+            iWantTheFocus = false;
+            return;
+        }
+
         if (!Input.GetMouseButton(0)) return;
 
         Vector2Int coordinate = board.ScreenSpaceToCoordinate(Input.mousePosition);
         if (!Board.IsOnBoard(coordinate.x, coordinate.y)) return;
-        
+
+        if (Input.GetMouseButtonDown(0))
+            iWantTheFocus = true;
+
         selectedCoordinate = coordinate;
         textFireButton.text = FormatString(coordinate);
         buttonFireButton.interactable = true;
@@ -57,7 +74,7 @@ public class GameShootingThing : MonoBehaviour
     {
         if (Board.IsOnBoard(selectedCoordinate.x, selectedCoordinate.y))
         {
-
+            
         }
     }
 }
