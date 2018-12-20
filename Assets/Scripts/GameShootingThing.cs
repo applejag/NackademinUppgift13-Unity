@@ -74,6 +74,9 @@ public class GameShootingThing : MonoBehaviour
 
         if (!iWantTheFocus) return;
 
+        if (game.game.RemotePlayer.Board.IsShotAt((coordinate.x, coordinate.y)))
+            return;
+
         selectedCoordinate = coordinate;
         textFireButton.text = FormatString(coordinate);
         buttonFireButton.interactable = true;
