@@ -11,6 +11,7 @@ public class GameShootingThing : MonoBehaviour
     public GameBoard board;
     public GameManager game;
     public GameMenu menu;
+    public BoardVisualizer visualizer;
 
     [Space]
     public string fireAtFormat = "FIRE ➵ {0}";
@@ -40,6 +41,7 @@ public class GameShootingThing : MonoBehaviour
         textFireButton.text = fireAtNothingText;
         buttonFireButton.interactable = false;
         selectedCoordinate = new Vector2Int(-1, -1);
+        visualizer.ResetAim();
     }
 
     private void OnDisable()
@@ -70,9 +72,12 @@ public class GameShootingThing : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             iWantTheFocus = true;
 
+        if (!iWantTheFocus) return;
+
         selectedCoordinate = coordinate;
         textFireButton.text = FormatString(coordinate);
         buttonFireButton.interactable = true;
+        visualizer.MoveAim(coordinate);
     }
 
     public void Fire()

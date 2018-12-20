@@ -4,12 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using BattleshipProtocol;
 using BattleshipProtocol.Game;
+using BattleshipProtocol.Game.Commands;
 using BattleshipProtocol.Protocol;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameBoard board;
+    public BoardVisualizer localVisualizer;
+    public BoardVisualizer remoteVisualizer;
 
     [NonSerialized]
     public BattleGame game;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
             Port = port
         }, board.protocolBoard, localPlayerName, connectCancellationToken.Token);
 
+        SetupEventHandlers();
         print("CLIENT CONNECTED WITH " + game.RemotePlayer.EndPoint);
     }
 
@@ -51,12 +55,34 @@ public class GameManager : MonoBehaviour
             Port = port
         }, board.protocolBoard, localPlayerName, hostCancellationTokenSource.Token);
 
+        SetupEventHandlers();
         print("HOST CONNECTED WITH " + game.RemotePlayer.EndPoint);
     }
 
     public Task Fire(Coordinate coordinate)
     {
         return game.ShootAtAsync(coordinate, null);
+    }
+
+    private void SetupEventHandlers()
+    {
+        var fireCommand = game.PacketConnection.GetCommand<FireCommand>();
+
+        fireCommand.TakenFire += (sender, outcome) => Dispatcher.Invoke(() =>
+        {
+            if (outcome.ShipHit is null)
+                localVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+            else
+                localVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+        });
+
+        fireCommand.FireResponse += (sender, outcome) => Dispatcher.Invoke(() =>
+        {
+            if (outcome.ShipHit is null)
+                remoteVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+            else
+                remoteVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+        });
     }
 
     private void OnEnable()

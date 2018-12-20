@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &30893592
 RectTransform:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30893591}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -6977,6 +6977,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 740273318}
+  localVisualizer: {fileID: 0}
+  remoteVisualizer: {fileID: 0}
 --- !u!4 &1369160477
 Transform:
   m_ObjectHideFlags: 0
@@ -10419,14 +10421,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
-      propertyPath: textFireButton
-      value: 
-      objectReference: {fileID: 230331316}
-    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
-      propertyPath: buttonFireButton
-      value: 
-      objectReference: {fileID: 1346028873}
-    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
       propertyPath: game
       value: 
       objectReference: {fileID: 1369160476}
@@ -10434,6 +10428,14 @@ PrefabInstance:
       propertyPath: menu
       value: 
       objectReference: {fileID: 707392827}
+    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
+      propertyPath: buttonFireButton
+      value: 
+      objectReference: {fileID: 1346028873}
+    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
+      propertyPath: textFireButton
+      value: 
+      objectReference: {fileID: 230331316}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
 --- !u!1001 &781379886319203712
