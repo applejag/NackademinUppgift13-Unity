@@ -58,7 +58,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 45
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9048155555770652163}
   - component: {fileID: 1174177700451953287}
+  - component: {fileID: 8480671132189467330}
   m_Layer: 0
   m_Name: Camera arm
   m_TagString: Untagged
@@ -121,13 +122,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480671132189467329}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ef29fa2ae7ec684390c0af414ec0293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZ: 250
-  minZ: 50
+  maxZ: 50
+  minZ: -100
   dragFalloff: 3.5
   camera: {fileID: 0}
   dragRayOrigin: 0
+--- !u!114 &8480671132189467330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480671132189467329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ef9f70469c6c94fbe68e284e9b26ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slideThreshold: 0.5
+  slideSpeed: 5

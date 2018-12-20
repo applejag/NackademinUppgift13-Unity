@@ -84,11 +84,11 @@ namespace UnityStandardAssets.Water
 
             //avoid frustum error ugh
             bool frustumError = false;
-            if (cam.transform.rotation.x == 0)
+            if (Mathf.Approximately(cam.transform.rotation.x, 0))
                 frustumError = true;
-            else if (cam.transform.rotation.y == 0)
+            else if (Mathf.Approximately(cam.transform.rotation.y, 0))
                 frustumError = true;
-            else if (cam.transform.rotation.z == 0)
+            else if (Mathf.Approximately(cam.transform.rotation.z, 0))
                 frustumError = true;
 
             // Render reflection if needed

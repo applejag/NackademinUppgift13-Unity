@@ -14,8 +14,14 @@ public class GameBoard : MonoBehaviour
     public List<GameShip> ships;
     public Board protocolBoard = new Board();
 
+    [Space]
+    public GameObject[] visuals;
+
     [SerializeField, HideInInspector]
     private Camera cam;
+
+    [SerializeField, HideInInspector]
+    private bool isRevealed;
 
     private void Awake()
     {
@@ -46,6 +52,24 @@ public class GameBoard : MonoBehaviour
         }
     }
 #endif
+
+    private void Start()
+    {
+        isRevealed = true;
+        SetShown(false);
+    }
+
+    public void SetShown(bool shown)
+    {
+        if (isRevealed == shown)
+            return;
+
+        isRevealed = shown;
+        foreach (GameObject visual in visuals)
+        {
+            visual.SetActive(shown);
+        }
+    }
 
     public Vector2Int WorldToCoordinate(Vector3 pos)
     {
