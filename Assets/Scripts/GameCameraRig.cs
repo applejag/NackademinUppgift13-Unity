@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Extensions;
+﻿using Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameCameraRig : MonoBehaviour
 {
