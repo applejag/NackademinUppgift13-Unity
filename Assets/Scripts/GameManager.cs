@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using BattleshipProtocol;
+using BattleshipProtocol.Game;
 using BattleshipProtocol.Protocol;
 using UnityEngine;
 
@@ -51,6 +52,11 @@ public class GameManager : MonoBehaviour
         }, board.protocolBoard, localPlayerName, hostCancellationTokenSource.Token);
 
         print("HOST CONNECTED WITH " + game.RemotePlayer.EndPoint);
+    }
+
+    public Task Fire(Coordinate coordinate)
+    {
+        return game.ShootAtAsync(coordinate, null);
     }
 
     private void OnEnable()

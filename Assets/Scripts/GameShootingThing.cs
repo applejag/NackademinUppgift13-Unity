@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BattleshipProtocol.Game;
 using Extensions;
 using UnityEngine;
@@ -8,9 +9,13 @@ using UnityEngine.UI;
 public class GameShootingThing : MonoBehaviour
 {
     public GameBoard board;
+    public GameManager game;
+    public GameMenu menu;
 
+    [Space]
     public string fireAtFormat = "FIRE ➵ {0}";
     public string fireAtNothingText = "SELECT TARGET";
+    public string fireInProgress = "FIRING…";
 
     [Header("UI references")]
     public Button buttonFireButton;
@@ -72,9 +77,16 @@ public class GameShootingThing : MonoBehaviour
 
     public void Fire()
     {
-        if (Board.IsOnBoard(selectedCoordinate.x, selectedCoordinate.y))
-        {
-            
-        }
+        if (!Board.IsOnBoard(selectedCoordinate.x, selectedCoordinate.y)) return;
+
+        textFireButton.text = fireInProgress;
+        buttonFireButton.interactable = false;
+        enabled = false;
+
+        game.Fire(new Coordinate(selectedCoordinate.x, selectedCoordinate.y))
+            .ContinueWith(Dispatcher.Wrap<Task>(task =>
+            {
+                menu.Menu_Error_Show(task.Exception, "Couldn't fire at given location:");
+            }), TaskContinuationOptions.OnlyOnFaulted);
     }
 }

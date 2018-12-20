@@ -550,6 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79146138}
   - component: {fileID: 79146139}
+  - component: {fileID: 79146140}
   m_Layer: 5
   m_Name: local player
   m_TagString: Untagged
@@ -590,6 +591,49 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &79146140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79146137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c7b3e8cd1297f48956d073cfd46e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnFadeInStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 740273318}
+        m_MethodName: SetShown
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeOutStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &119494569
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,7 +5534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1190172267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5519,7 +5563,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190172266}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -6969,6 +7013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1385794829}
   - component: {fileID: 1385794830}
+  - component: {fileID: 1385794831}
   m_Layer: 5
   m_Name: remote player
   m_TagString: Untagged
@@ -7009,6 +7054,49 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1385794831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385794828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c7b3e8cd1297f48956d073cfd46e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnFadeInStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeOutStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1829362981}
+        m_MethodName: SetShown
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1387854967
 GameObject:
   m_ObjectHideFlags: 0
@@ -7973,17 +8061,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1432678034}
         m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 740273318}
-        m_MethodName: SetShown
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9746,7 +9823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1879540442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9813,7 +9890,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879540441}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -10349,6 +10426,14 @@ PrefabInstance:
       propertyPath: buttonFireButton
       value: 
       objectReference: {fileID: 1346028873}
+    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1369160476}
+    - target: {fileID: 1829362983, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 707392827}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
 --- !u!1001 &781379886319203712
