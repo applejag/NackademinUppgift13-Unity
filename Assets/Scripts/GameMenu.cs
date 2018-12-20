@@ -52,6 +52,7 @@ public class GameMenu : MonoBehaviour
     public CanvasGroup groupLoadingModalWithAbort;
     public CanvasGroup groupErrorModalWithClose;
     public CanvasGroup groupGameStarted;
+    public CanvasGroup groupDisconnected;
 
     [Header("Input references")]
     public InputField fieldPlayerName;
@@ -153,6 +154,8 @@ public class GameMenu : MonoBehaviour
 
         DisposeMySource(canvasGroup, cancellationToken);
     }
+
+    #region Menu button callbacks
 
     public void Menu_PickName_SetPlayerName()
     {
@@ -274,6 +277,25 @@ public class GameMenu : MonoBehaviour
             .ContinueWith(task => Dispatcher.Invoke(HandleGameConnectResult, task, "Error while hosting game:"));
     }
 
+    public void Menu_Disconnected_Dismiss()
+    {
+        gameManager.CancelConnect();
+        
+        FadeOutMenu(groupPlayerNameRemote);
+        FadeOutMenu(groupNewGame);
+        FadeOutMenu(groupHostGame);
+        FadeOutMenu(groupJoinGame);
+        FadeOutMenu(groupJoinClientStartGame);
+        FadeOutMenu(groupLoadingModalWithAbort);
+        FadeOutMenu(groupErrorModalWithClose);
+        FadeOutMenu(groupGameStarted);
+        FadeOutMenu(groupDisconnected);
+
+        FadeInMenu(groupPlaceYourShips);
+    }
+
+    #endregion
+
     private void HandleGameConnectResult(Task task, string errorTitle)
     {
         if (task.IsFaulted || task.IsCanceled)
@@ -329,6 +351,10 @@ public class GameMenu : MonoBehaviour
                 FadeOutMenu(groupJoinClientStartGame);
                 FadeOutMenu(groupHostGame);
                 FadeOutMenu(groupLoadingModalWithAbort);
+                break;
+
+            case GameState.Disconnected:
+                FadeInMenu(groupDisconnected);
                 break;
         }
     }
