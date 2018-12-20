@@ -5,6 +5,7 @@ using System.Linq;
 using BattleshipProtocol.Game;
 using Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoardShipPlacer : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class BoardShipPlacer : MonoBehaviour
     public float queueGapDescentSpeed = 2;
 
     public float raycastMaxDistance = 1000;
+    public float dragMinDistance = 0.9f;
+
+    public UnityEvent allShipsPlaced;
 
     [SerializeField, HideInInspector]
     private Camera cam;
@@ -27,7 +31,11 @@ public class BoardShipPlacer : MonoBehaviour
     [SerializeField, HideInInspector]
     private Orientation dragOrientation = Orientation.South;
 
+    [SerializeField, HideInInspector]
+    private Vector2Int dragOrigin;
+
     private bool justSelected;
+
 
 #if UNITY_EDITOR
     private List<GameShip> _editorQueueList;
@@ -108,6 +116,9 @@ public class BoardShipPlacer : MonoBehaviour
         selectedShip = gameShip;
         dragOrientation = gameShip.GetShip().Orientation;
         justSelected = true;
+        dragOrigin = gameShip.GetBoardCoordinateFromPosition();
+
+        Debug.DrawRay(board.CoordinateToWorld(dragOrigin), Vector3.up * 10, Color.red, 5);
     }
 
     private void PlaceTheShip()
@@ -118,6 +129,8 @@ public class BoardShipPlacer : MonoBehaviour
         Vector3 rayPosition = cam.ScreenToFlatWorldPoint(Input.mousePosition);
         Vector3 offset = selectedShip.GetPositionOffset();
         Vector2Int coordinate = board.WorldToCoordinate(rayPosition - offset);
+        Debug.DrawRay(rayPosition, Vector3.up * 5);
+        Debug.DrawRay(rayPosition, offset * 15);
 
         selectedShip.SetPositionFromCoordinate(coordinate, dragOrientation, 10);
 
@@ -125,7 +138,9 @@ public class BoardShipPlacer : MonoBehaviour
         int length = selectedShip.GetLength();
         int xLength = dragOrientation == Orientation.East ? length : 1;
         int yLength = dragOrientation == Orientation.South ? length : 1;
-        if (!Board.IsOnBoard(coordinate.x, coordinate.y) && !Board.IsOnBoard(coordinate.x + xLength - 1, coordinate.y + yLength - 1))
+        if (!justSelected &&
+            !Board.IsOnBoard(coordinate.x, coordinate.y) &&
+            !Board.IsOnBoard(coordinate.x + xLength - 1, coordinate.y + yLength - 1))
         {
             if (Input.GetMouseButtonDown(0))
                 dragOrientation = FlipOrientation(dragOrientation);
@@ -133,13 +148,17 @@ public class BoardShipPlacer : MonoBehaviour
             return;
         }
 
+        // Continue if mouse release
         if (!Input.GetMouseButtonUp(0))
             return;
 
         if (justSelected)
         {
             justSelected = false;
-            return;
+
+            // Dragged it long enough
+            if ((coordinate - dragOrigin).magnitude < dragMinDistance)
+                return;
         }
 
         try
@@ -153,10 +172,15 @@ public class BoardShipPlacer : MonoBehaviour
 
         // Move queue
         if (queueList.Remove(selectedShip))
+        {
             queueGapLeft = queueGap;
 
+            if (queueList.Count == 0)
+                allShipsPlaced.Invoke();
+        }
+
         selectedShip.SetPositionFromCoordinate(coordinate, dragOrientation);
-        print($"moved {selectedShip.name} to {coordinate}");
+        print($"moved {selectedShip.name} to {coordinate}, {dragOrientation}");
         selectedShip = null;
     }
 
