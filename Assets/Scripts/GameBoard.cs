@@ -15,7 +15,8 @@ public class GameBoard : MonoBehaviour
     public Board protocolBoard = new Board();
 
     [Space]
-    public GameObject[] visuals;
+    public string OnBoardShownMessage = "OnBoardShown";
+    public string OnBoardHiddenMessage = "OnBoardHidden";
 
     [SerializeField, HideInInspector]
     private Camera cam;
@@ -65,10 +66,10 @@ public class GameBoard : MonoBehaviour
             return;
 
         isRevealed = shown;
-        foreach (GameObject visual in visuals)
-        {
-            visual.SetActive(shown);
-        }
+        SendMessage(isRevealed 
+            ? OnBoardShownMessage 
+            : OnBoardHiddenMessage, 
+            SendMessageOptions.DontRequireReceiver);
     }
 
     public Vector2Int WorldToCoordinate(Vector3 pos)

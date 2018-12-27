@@ -5,10 +5,14 @@ using UnityEngine;
 public class BoardVisualizer : MonoBehaviour
 {
     public GameBoard board;
+    public RevealFog fogRemover;
 
     public GameObject prefabAim;
     public GameObject prefabMiss;
     public GameObject prefabHit;
+
+    [Header("Settings")]
+    public bool removeFogOnAim = false;
 
     [SerializeField, HideInInspector]
     private List<GameObject> placed = new List<GameObject>();
@@ -30,8 +34,13 @@ public class BoardVisualizer : MonoBehaviour
 
     public void MoveAim(Vector2Int coordinate)
     {
+        Vector3 position = board.CoordinateToWorld(coordinate, transform.position.y);
+
         prefabAim.SetActive(true);
-        prefabAim.transform.position = board.CoordinateToWorld(coordinate, transform.position.y);
+        prefabAim.transform.position = position;
+
+        if (removeFogOnAim)
+            RemoveFogAt(coordinate, false);
     }
 
     public void ResetAim()
@@ -54,8 +63,17 @@ public class BoardVisualizer : MonoBehaviour
     private void PlacePrefabAt(GameObject prefab, Vector2Int coordinate)
     {
         Vector3 position = board.CoordinateToWorld(coordinate, transform.position.y);
+
         GameObject clone = Instantiate(prefab, position, prefab.transform.rotation, transform);
         clone.SetActive(true);
         placed.Add(clone);
+
+        RemoveFogAt(coordinate, true);
+    }
+
+    private void RemoveFogAt(Vector2Int coordinate, bool permanently)
+    {
+        if (fogRemover != null)
+            fogRemover.StopTheFogAt(coordinate, permanently);
     }
 }
