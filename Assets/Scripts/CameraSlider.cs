@@ -8,13 +8,10 @@ public class CameraSlider : MonoBehaviour
     public float slideSpeed = 5;
     public GameCameraRig cameraRig;
 
-    private Coroutine currentSliding;
-
     public void SlideTowards(Transform target)
     {
-        if (currentSliding != null)
-            StopCoroutine(currentSliding);
-        currentSliding = StartCoroutine(SlideFollowCoroutine(target));
+        StopAllCoroutines();
+        StartCoroutine(SlideFollowCoroutine(target));
     }
 
     private IEnumerator SlideFollowCoroutine(Transform target)
@@ -26,15 +23,12 @@ public class CameraSlider : MonoBehaviour
         }
 
         transform.position = target.position;
-        currentSliding = null;
     }
 
     public void SlideTowards(Vector3 target)
     {
-        if (currentSliding != null)
-            StopCoroutine(currentSliding);
-
-        currentSliding = StartCoroutine(SlideTowardsCoroutine(target));
+        StopAllCoroutines();
+        StartCoroutine(SlideTowardsCoroutine(target));
     }
 
     private IEnumerator SlideTowardsCoroutine(Vector3 target)
@@ -47,15 +41,12 @@ public class CameraSlider : MonoBehaviour
         }
 
         transform.position = target;
-        currentSliding = null;
     }
 
     public void FollowUntilItDies(Transform target)
     {
-        if (currentSliding != null)
-            StopCoroutine(currentSliding);
-
-        currentSliding = StartCoroutine(FollowCoroutine(target));
+        StopAllCoroutines();
+        StartCoroutine(FollowCoroutine(target));
     }
 
     private IEnumerator FollowCoroutine(Transform target)
@@ -65,8 +56,6 @@ public class CameraSlider : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, TransformTarget(target.position), Time.deltaTime * slideSpeed);
             yield return null;
         }
-        
-        currentSliding = null;
     }
 
     private Vector3 TransformTarget(Vector3 target)

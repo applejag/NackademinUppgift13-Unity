@@ -66,6 +66,7 @@ public class BoardVisualizer : MonoBehaviour
         {
             PlacePrefabAt(prefabHit, coordinate);
             cameraRig.enabled = true;
+            cameraSlider.StopAllCoroutines();
         });
         FollowWithCamera(missileScript);
 
@@ -78,6 +79,7 @@ public class BoardVisualizer : MonoBehaviour
         {
             PlacePrefabAt(prefabMiss, coordinate);
             cameraRig.enabled = true;
+            cameraSlider.StopAllCoroutines();
         });
         FollowWithCamera(missileScript);
 
@@ -118,8 +120,17 @@ public class BoardVisualizer : MonoBehaviour
             fogRemover.StopTheFogAt(coordinate, permanently);
     }
 
-    public virtual void OnShipSunk(Ship ship)
-    { }
+    public void OnShipMoved(Ship ship)
+    {
+        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
+        gameShip.OnShipMoved(ship);
+    }
+
+    public void OnShipDamaged(Ship ship)
+    {
+        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
+        gameShip.OnShipDamaged(ship);
+    }
 
     public enum CameraFollowMode
     {
