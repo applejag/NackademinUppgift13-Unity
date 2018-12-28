@@ -19,9 +19,6 @@ public class MissileSiloScript : MonoBehaviour
     public float acceleration = 10;
     public float turnSpeed = 270;
     public float turnDelay = 1.5f;
-    [Space]
-    public bool cameraShouldFollowMissile;
-
 
 #if UNITY_EDITOR
     [Header("Testing")]
@@ -56,27 +53,29 @@ public class MissileSiloScript : MonoBehaviour
             Time.fixedDeltaTime);
     }
 
-    private void FireMissile(Vector3 from, Vector3 to, Action<MissileScript> onExplode = null)
+    private MissileScript FireMissile(Vector3 from, Vector3 to, Action<MissileScript> onExplode = null)
     {
         GameObject clone = Instantiate(missilePrefab, from, Quaternion.identity);
         var missileScript = clone.GetComponent<MissileScript>();
         missileScript.snapshots = CalculateMyPath(from, to);
         missileScript.onExplode = onExplode;
+
+        return missileScript;
     }
 
-    public void FireMissileHit(Vector3 to, Action<MissileScript> onExplode = null)
+    public MissileScript FireMissileHit(Vector3 to, Action<MissileScript> onExplode = null)
     {
-        FireMissileWithExplosion(GetFrom(), to, explosionHitPrefab, onExplode);
+        return FireMissileWithExplosion(GetFrom(), to, explosionHitPrefab, onExplode);
     }
 
-    public void FireMissileMiss(Vector3 to, Action<MissileScript> onExplode = null)
+    public MissileScript FireMissileMiss(Vector3 to, Action<MissileScript> onExplode = null)
     {
-        FireMissileWithExplosion(GetFrom(), to, explosionMissPrefab, onExplode);
+        return FireMissileWithExplosion(GetFrom(), to, explosionMissPrefab, onExplode);
     }
 
-    private void FireMissileWithExplosion(Vector3 from, Vector3 to, GameObject explosion, Action<MissileScript> onExplode = null)
+    private MissileScript FireMissileWithExplosion(Vector3 from, Vector3 to, GameObject explosion, Action<MissileScript> onExplode = null)
     {
-        FireMissile(from, to, script =>
+        return FireMissile(from, to, script =>
         {
             var position = new Vector3(to.x, explosion.transform.position.y, to.z);
             Instantiate(explosion, position, Quaternion.identity);

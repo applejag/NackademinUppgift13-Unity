@@ -147,3 +147,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slideThreshold: 0.5
   slideSpeed: 5
+  cameraRig: {fileID: 1174177700451953287}

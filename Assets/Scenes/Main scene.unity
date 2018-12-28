@@ -10443,6 +10443,16 @@ PrefabInstance:
       propertyPath: missileSilo
       value: 
       objectReference: {fileID: 1627148036}
+    - target: {fileID: 7992492689262153939, guid: b77b0bcb7895fdf41945b1785b2583b5,
+        type: 3}
+      propertyPath: cameraSlider
+      value: 
+      objectReference: {fileID: 8480671132189467330}
+    - target: {fileID: 7992492689262153939, guid: b77b0bcb7895fdf41945b1785b2583b5,
+        type: 3}
+      propertyPath: cameraRig
+      value: 
+      objectReference: {fileID: 1174177700451953287}
     - target: {fileID: 4435189387249400672, guid: b77b0bcb7895fdf41945b1785b2583b5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10623,6 +10633,16 @@ PrefabInstance:
       propertyPath: missileSilo
       value: 
       objectReference: {fileID: 2022406854}
+    - target: {fileID: 6467160419558640657, guid: 4b6472de1fed9a84d8f5d575e861cc15,
+        type: 3}
+      propertyPath: cameraSlider
+      value: 
+      objectReference: {fileID: 8480671132189467330}
+    - target: {fileID: 6467160419558640657, guid: 4b6472de1fed9a84d8f5d575e861cc15,
+        type: 3}
+      propertyPath: cameraRig
+      value: 
+      objectReference: {fileID: 1174177700451953287}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b6472de1fed9a84d8f5d575e861cc15, type: 3}
 --- !u!114 &1174177700451953287 stripped

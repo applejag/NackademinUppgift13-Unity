@@ -270,6 +270,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 7456124148276308709, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: cameraFollowMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7741656828831707887, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: m_RootOrder
