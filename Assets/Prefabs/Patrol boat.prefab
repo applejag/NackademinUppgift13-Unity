@@ -47,6 +47,7 @@ MonoBehaviour:
   board: {fileID: 0}
   shipType: 5
   offset: {x: 0, y: 0, z: 0.5}
+  missileSilo: {x: 0, y: 0.22, z: -0.36}
 --- !u!1001 &7220533309135548177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +55,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8036044452253116380}
     m_Modifications:
+    - target: {fileID: 100000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -109,10 +114,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.585414
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
-      propertyPath: m_Name
-      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
