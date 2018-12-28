@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using BattleshipProtocol.Game;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class BoardVisualizer : MonoBehaviour
 {
     public GameBoard board;
@@ -114,6 +117,9 @@ public class BoardVisualizer : MonoBehaviour
         if (fogRemover != null)
             fogRemover.StopTheFogAt(coordinate, permanently);
     }
+
+    public virtual void OnShipSunk(Ship ship)
+    { }
 
     public enum CameraFollowMode
     {

@@ -12,7 +12,7 @@ public class GameBoard : MonoBehaviour
     public Transform boardToWorldTransform;
 
     public List<GameShip> ships;
-    public Board protocolBoard = new Board();
+    public Board protocolBoard { get; private set; } = new Board();
 
     [Space]
     public string OnBoardShownMessage = "OnBoardShown";
@@ -52,7 +52,28 @@ public class GameBoard : MonoBehaviour
             UnityEditor.Handles.Label(boardToWorldTransform.TransformPoint(9.5f, 0, 9.5f), "J10");
         }
     }
+
+    [Header("Debug")]
+    public bool updateShipPositions;
+    private void OnValidate()
+    {
+        if (!updateShipPositions) return;
+        updateShipPositions = false;
+
+        foreach (GameShip ship in ships)
+        {
+
+            Vector2Int coordinate = ship.GetBoardCoordinateFromPosition();
+            Orientation orientation = DirectionToOrientation(ship.transform.forward);
+            ship.SetPositionFromCoordinate(coordinate, orientation);
+        }
+    }
 #endif
+
+    public void SetBoard(Board board)
+    {
+        protocolBoard = board;
+    }
 
     private void Start()
     {
@@ -66,9 +87,9 @@ public class GameBoard : MonoBehaviour
             return;
 
         isRevealed = shown;
-        SendMessage(isRevealed 
-            ? OnBoardShownMessage 
-            : OnBoardHiddenMessage, 
+        SendMessage(isRevealed
+            ? OnBoardShownMessage
+            : OnBoardHiddenMessage,
             SendMessageOptions.DontRequireReceiver);
     }
 
@@ -101,5 +122,16 @@ public class GameBoard : MonoBehaviour
     public Quaternion OrientationToRotation(Orientation orientation)
     {
         return Quaternion.LookRotation(OrientationToDirection(orientation), transform.up);
+    }
+
+    public Orientation DirectionToOrientation(Vector3 direction)
+    {
+        direction.y = 0;
+        Vector3 east = OrientationToDirection(Orientation.East);
+        float angle = Vector3.Angle(east, direction);
+
+        return angle < 45 || angle > 135
+            ? Orientation.East
+            : Orientation.South;
     }
 }

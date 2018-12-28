@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8036044452253116380}
   - component: {fileID: 6263217934898925892}
+  - component: {fileID: 5795869430716874630}
   m_Layer: 0
   m_Name: Patrol boat
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 13, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7220533309135156625}
+  - {fileID: 5617830732437505330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,12 +49,59 @@ MonoBehaviour:
   shipType: 5
   offset: {x: 0, y: 0, z: 0.5}
   missileSilo: {x: 0, y: 0.22, z: -0.36}
+  model: {fileID: 5617830732437505330}
+  modelRotationYEast: 0
+  modelRotationYSouth: 0
+--- !u!65 &5795869430716874630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789089780543266869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7599661, y: 0.37264895, z: 1.5190365}
+  m_Center: {x: 0, y: 0.19223797, z: 0}
+--- !u!1 &5141895228308680040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5617830732437505330}
+  m_Layer: 0
+  m_Name: Model pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5617830732437505330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5141895228308680040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7220533309135156625}
+  m_Father: {fileID: 8036044452253116380}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7220533309135548177
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8036044452253116380}
+    m_TransformParent: {fileID: 5617830732437505330}
     m_Modifications:
     - target: {fileID: 100000, guid: 9b454bcfea695cd44825342718e280cf, type: 3}
       propertyPath: m_Name

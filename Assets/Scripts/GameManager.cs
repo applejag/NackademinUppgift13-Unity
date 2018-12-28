@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BattleshipProtocol;
@@ -66,6 +67,9 @@ public class GameManager : MonoBehaviour
 
     private void SetupEventHandlers()
     {
+        localVisualizer.board.SetBoard(game.LocalPlayer.Board);
+        remoteVisualizer.board.SetBoard(game.RemotePlayer.Board);
+
         var fireCommand = game.PacketConnection.GetCommand<FireCommand>();
 
         fireCommand.TakenFire += (sender, outcome) => Dispatcher.Invoke(() =>
@@ -83,6 +87,11 @@ public class GameManager : MonoBehaviour
             else
                 remoteVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
         });
+
+        foreach (Ship ship in game.RemotePlayer.Board.Ships)
+        {
+            ship.ShipMoved += delegate { Dispatcher.Invoke(remoteVisualizer.OnShipSunk, ship); };
+        }
     }
 
     private void OnEnable()

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1069009970504638484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5380604395842121090}
+  m_Layer: 0
+  m_Name: Model pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5380604395842121090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069009970504638484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6876562912963449481}
+  m_Father: {fileID: 8489876219011206723}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8860428835628056035
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +60,7 @@ Transform:
   m_LocalPosition: {x: 7, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6876562912963449481}
+  - {fileID: 5380604395842121090}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +80,9 @@ MonoBehaviour:
   shipType: 3
   offset: {x: 0, y: 0, z: 1}
   missileSilo: {x: 0, y: 0.3, z: -0.29}
+  model: {fileID: 5380604395842121090}
+  modelRotationYEast: 0
+  modelRotationYSouth: 0
 --- !u!65 &6672029622116953331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,7 +101,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8489876219011206723}
+    m_TransformParent: {fileID: 5380604395842121090}
     m_Modifications:
     - target: {fileID: 100000, guid: a9debb4c8107d124eb7d18cbbea775ec, type: 3}
       propertyPath: m_Name
