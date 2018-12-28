@@ -10524,41 +10524,6 @@ PrefabInstance:
       propertyPath: textFireButton
       value: 
       objectReference: {fileID: 230331316}
-    - target: {fileID: 7236178051028675044, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5617673816403306457, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5617673816403306457, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208147181745375578, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208147181745375578, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
-      objectReference: {fileID: 0}
-    - target: {fileID: 4068866286527434373, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4068866286527434373, guid: b77b0bcb7895fdf41945b1785b2583b5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77b0bcb7895fdf41945b1785b2583b5, type: 3}
 --- !u!1001 &781379886319203712

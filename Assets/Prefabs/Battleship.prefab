@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9080151243153216690}
   - component: {fileID: 7955004543657192480}
+  - component: {fileID: 6695097683519959624}
   m_Layer: 0
   m_Name: Anim pivot
   m_TagString: Untagged
@@ -82,6 +83,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6695097683519959624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7969566189033963320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ce2307eb7d9444da7091c3eafad593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7955004543657192480}
+  nameOfParameter: IdleOffset
 --- !u!1 &8952426612921632906
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +149,9 @@ MonoBehaviour:
   model: {fileID: 6439625920678973179}
   modelRotationYEast: 0
   modelRotationYSouth: 0
+  anim: {fileID: 7955004543657192480}
+  animDamagedTrigger: OnDamaged
+  animSunkBoolean: IsSunk
 --- !u!65 &7922680618070788681
 BoxCollider:
   m_ObjectHideFlags: 0

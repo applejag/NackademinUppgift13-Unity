@@ -16,7 +16,10 @@ public class GameShip : MonoBehaviour
     public Transform model;
     public float modelRotationYEast;
     public float modelRotationYSouth;
-
+    [Space]
+    public Animator anim;
+    public string animDamagedTrigger = "OnDamaged";
+    public string animSunkBoolean = "IsSunk";
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
@@ -46,6 +49,17 @@ public class GameShip : MonoBehaviour
         Gizmos.DrawWireCube(world + Vector3.up * size.y * 0.5f, size);
     }
 #endif
+
+    public void OnShipDamaged(Ship ship)
+    {
+        anim.SetTrigger(animDamagedTrigger);
+        anim.SetBool(animSunkBoolean, ship.Health == 0);
+    }
+
+    public void OnShipMoved(Ship ship)
+    {
+
+    }
 
     public Vector3 GetMissileSiloWorldPosition()
     {

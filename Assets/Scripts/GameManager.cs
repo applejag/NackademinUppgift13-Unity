@@ -75,22 +75,26 @@ public class GameManager : MonoBehaviour
         fireCommand.TakenFire += (sender, outcome) => Dispatcher.Invoke(() =>
         {
             if (outcome.ShipHit is null)
-                localVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+                localVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
             else
-                localVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+                localVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
         });
 
         fireCommand.FireResponse += (sender, outcome) => Dispatcher.Invoke(() =>
         {
             if (outcome.ShipHit is null)
-                remoteVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+                remoteVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
             else
-                remoteVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
+                remoteVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
         });
 
         foreach (Ship ship in game.RemotePlayer.Board.Ships)
         {
-            ship.ShipMoved += delegate { Dispatcher.Invoke(remoteVisualizer.OnShipSunk, ship); };
+            ship.ShipMoved += delegate { Dispatcher.Invoke(remoteVisualizer.OnShipMoved, ship); };
+        }
+        foreach (Ship ship in game.LocalPlayer.Board.Ships)
+        {
+            ship.ShipMoved += delegate { Dispatcher.Invoke(localVisualizer.OnShipMoved, ship); };
         }
     }
 

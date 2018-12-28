@@ -60,26 +60,36 @@ public class BoardVisualizer : MonoBehaviour
         prefabAim.SetActive(false);
     }
 
-    public void PlaceHitAt(Vector2Int coordinate)
+    public void OnShipMoved(Ship ship)
     {
+        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
+        gameShip.OnShipMoved(ship);
+    }
+
+    public void PlaceHitAt(Vector2Int coordinate, Ship ship)
+    {
+        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
         MissileScript missileScript = missileSilo.FireMissileHit(board.CoordinateToWorld(coordinate), missile =>
         {
             PlacePrefabAt(prefabHit, coordinate);
             cameraRig.enabled = true;
             cameraSlider.StopAllCoroutines();
+            gameShip.OnShipDamaged(ship);
         });
         FollowWithCamera(missileScript);
 
         ResetAim();
     }
 
-    public void PlaceMissAt(Vector2Int coordinate)
+    public void PlaceMissAt(Vector2Int coordinate, Ship ship)
     {
+        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
         MissileScript missileScript = missileSilo.FireMissileMiss(board.CoordinateToWorld(coordinate), missile =>
         {
             PlacePrefabAt(prefabMiss, coordinate);
             cameraRig.enabled = true;
             cameraSlider.StopAllCoroutines();
+            gameShip.OnShipDamaged(ship);
         });
         FollowWithCamera(missileScript);
 
@@ -118,18 +128,6 @@ public class BoardVisualizer : MonoBehaviour
     {
         if (fogRemover != null)
             fogRemover.StopTheFogAt(coordinate, permanently);
-    }
-
-    public void OnShipMoved(Ship ship)
-    {
-        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
-        gameShip.OnShipMoved(ship);
-    }
-
-    public void OnShipDamaged(Ship ship)
-    {
-        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
-        gameShip.OnShipDamaged(ship);
     }
 
     public enum CameraFollowMode

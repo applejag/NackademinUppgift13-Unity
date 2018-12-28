@@ -40,57 +40,6 @@ Transform:
   m_Father: {fileID: 2056151527350055734}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829362983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4435189387249400675}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd49f76476ad6a4a8e1f035fd075c94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  board: {fileID: 4435189388188723520}
-  game: {fileID: 0}
-  menu: {fileID: 0}
-  visualizer: {fileID: 7992492689262153939}
-  fireAtFormat: "FIRE \u27B5 {0}"
-  fireAtNothingText: SELECT TARGET
-  fireInProgress: "FIRING\u2026"
-  buttonFireButton: {fileID: 0}
-  textFireButton: {fileID: 0}
-  camera: {fileID: 0}
-  selectedCoordinate: {x: 0, y: 0}
-  iWantTheFocus: 0
---- !u!114 &4091462831510876820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4435189387249400675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9244cb122419bef4c8659419c52ad9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBetweenSquares: 0.1
-  timeBetweenRows: 0.3
-  fogRemoveTime: 0.2
-  fogRemover: {fileID: 3372482305943768478}
-  fogRows:
-  - {fileID: 6359120851335523471}
-  - {fileID: 8709022478725018281}
-  - {fileID: 8297056907586438382}
-  - {fileID: 1057397147751072410}
-  - {fileID: 5361888340573495949}
-  - {fileID: 6194844398114654928}
-  - {fileID: 251554122627822679}
-  - {fileID: 1042691870235435996}
-  - {fileID: 6650470810006596275}
-  - {fileID: 6108940348017137682}
 --- !u!1 &1042691870235435996
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +718,57 @@ Transform:
   m_Father: {fileID: 2056151527350055734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829362983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4435189387249400675}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd49f76476ad6a4a8e1f035fd075c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 4435189388188723520}
+  game: {fileID: 0}
+  menu: {fileID: 0}
+  visualizer: {fileID: 7992492689262153939}
+  fireAtFormat: "FIRE \u27B5 {0}"
+  fireAtNothingText: SELECT TARGET
+  fireInProgress: "FIRING\u2026"
+  buttonFireButton: {fileID: 0}
+  textFireButton: {fileID: 0}
+  camera: {fileID: 0}
+  selectedCoordinate: {x: 0, y: 0}
+  iWantTheFocus: 0
+--- !u!114 &4091462831510876820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4435189387249400675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9244cb122419bef4c8659419c52ad9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenSquares: 0.1
+  timeBetweenRows: 0.3
+  fogRemoveTime: 0.2
+  fogRemover: {fileID: 3372482305943768478}
+  fogRows:
+  - {fileID: 6359120851335523471}
+  - {fileID: 8709022478725018281}
+  - {fileID: 8297056907586438382}
+  - {fileID: 1057397147751072410}
+  - {fileID: 5361888340573495949}
+  - {fileID: 6194844398114654928}
+  - {fileID: 251554122627822679}
+  - {fileID: 1042691870235435996}
+  - {fileID: 6650470810006596275}
+  - {fileID: 6108940348017137682}
 --- !u!1 &5361888340573495949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1921,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 3728488024706334680, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479437340134468781, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332968432213601481, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 735304830014581137, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: modelRotationYEast
@@ -1941,6 +1956,11 @@ PrefabInstance:
       propertyPath: fogRemover
       value: 
       objectReference: {fileID: 4091462831510876820}
+    - target: {fileID: 7347407190125574712, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7307344045199169069, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
       propertyPath: modelRotationYEast
@@ -1950,6 +1970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: modelRotationYEast
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509264880331347563, guid: 5dea3d658f3d5e84a8927ad6135971ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741656828831707887, guid: 5dea3d658f3d5e84a8927ad6135971ec,
         type: 3}
