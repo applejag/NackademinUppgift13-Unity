@@ -3667,6 +3667,7 @@ MonoBehaviour:
   OnBoardHiddenMessage: OnBoardHidden
   cam: {fileID: 0}
   isRevealed: 0
+  updateShipPositions: 0
 --- !u!1 &3755586020274131630
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,12 +4772,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 3755586020121908086}
+  cameraSlider: {fileID: 0}
+  cameraRig: {fileID: 0}
   prefabAim: {fileID: 4090867262639048414}
   prefabMiss: {fileID: 7509316839218471089}
   prefabHit: {fileID: 4130471484827980323}
   missileSilo: {fileID: 0}
   fogRemover: {fileID: 0}
   removeFogOnAim: 0
+  cameraFollowMode: 1
   placed: []
 --- !u!1 &7509316839218471089
 GameObject:

@@ -108,7 +108,7 @@ public class BoardShipPlacer : MonoBehaviour
         if (!Physics.Raycast(mouseRay, out RaycastHit hitInfo, raycastMaxDistance))
             return;
 
-        var gameShip = hitInfo.collider.GetComponent<GameShip>();
+        var gameShip = hitInfo.collider.GetComponentInParent<GameShip>();
 
         if (gameShip is null)
             return;
