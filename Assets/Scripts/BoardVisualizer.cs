@@ -42,6 +42,11 @@ public class BoardVisualizer : MonoBehaviour
         }
         placed.Clear();
         ResetAim();
+        foreach (GameShip boardShip in board.ships)
+        {
+            if (!boardShip.GetShip().IsOnBoard)
+                boardShip.gameObject.SetActive(false);
+        }
     }
 
     public void MoveAim(Vector2Int coordinate)
@@ -81,15 +86,13 @@ public class BoardVisualizer : MonoBehaviour
         ResetAim();
     }
 
-    public void PlaceMissAt(Vector2Int coordinate, Ship ship)
+    public void PlaceMissAt(Vector2Int coordinate)
     {
-        GameShip gameShip = board.ships.First(s => s.shipType == ship.Type);
         MissileScript missileScript = missileSilo.FireMissileMiss(board.CoordinateToWorld(coordinate), missile =>
         {
             PlacePrefabAt(prefabMiss, coordinate);
             cameraRig.enabled = true;
             cameraSlider.StopAllCoroutines();
-            gameShip.OnShipDamaged(ship);
         });
         FollowWithCamera(missileScript);
 

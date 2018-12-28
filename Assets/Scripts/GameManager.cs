@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         fireCommand.TakenFire += (sender, outcome) => Dispatcher.Invoke(() =>
         {
             if (outcome.ShipHit is null)
-                localVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
+                localVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
             else
                 localVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
         });
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         fireCommand.FireResponse += (sender, outcome) => Dispatcher.Invoke(() =>
         {
             if (outcome.ShipHit is null)
-                remoteVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
+                remoteVisualizer.PlaceMissAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y));
             else
                 remoteVisualizer.PlaceHitAt(new Vector2Int(outcome.Coordinate.X, outcome.Coordinate.Y), outcome.ShipHit);
         });

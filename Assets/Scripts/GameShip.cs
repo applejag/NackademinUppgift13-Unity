@@ -58,7 +58,8 @@ public class GameShip : MonoBehaviour
 
     public void OnShipMoved(Ship ship)
     {
-
+        gameObject.SetActive(true);
+        SetPositionFromCoordinate(new Vector2Int(ship.X, ship.Y), ship.Orientation);
     }
 
     public Vector3 GetMissileSiloWorldPosition()

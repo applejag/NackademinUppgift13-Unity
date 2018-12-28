@@ -86,6 +86,11 @@ public class BoardShipPlacer : MonoBehaviour
     {
         queueGapLeft = queueGap;
         queueList = new List<GameShip>(board.ships);
+
+        foreach (GameShip boardShip in board.ships)
+        {
+            boardShip.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
