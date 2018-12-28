@@ -5,11 +5,15 @@ using UnityEngine;
 public class BoardVisualizer : MonoBehaviour
 {
     public GameBoard board;
-    public RevealFog fogRemover;
 
     public GameObject prefabAim;
     public GameObject prefabMiss;
     public GameObject prefabHit;
+
+    public MissileSiloScript missileSilo;
+
+    [Header("Can be null")]
+    public RevealFog fogRemover;
 
     [Header("Settings")]
     public bool removeFogOnAim = false;
@@ -50,14 +54,20 @@ public class BoardVisualizer : MonoBehaviour
 
     public void PlaceHitAt(Vector2Int coordinate)
     {
+        missileSilo.FireMissileHit(board.CoordinateToWorld(coordinate), missile =>
+        {
+            PlacePrefabAt(prefabHit, coordinate);
+        });
         ResetAim();
-        PlacePrefabAt(prefabHit, coordinate);
     }
 
     public void PlaceMissAt(Vector2Int coordinate)
     {
+        missileSilo.FireMissileMiss(board.CoordinateToWorld(coordinate), missile =>
+        {
+            PlacePrefabAt(prefabMiss, coordinate);
+        });
         ResetAim();
-        PlacePrefabAt(prefabMiss, coordinate);
     }
 
     private void PlacePrefabAt(GameObject prefab, Vector2Int coordinate)

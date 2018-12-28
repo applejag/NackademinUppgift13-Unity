@@ -44,16 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ae49847b30c3946b6f6a5960e2848c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4981180050763194979}
+  missilePrefab: {fileID: 2883211457467938878, guid: 965260d351784a6459df970ceab6eb80,
+    type: 3}
+  fireFrom: []
+  explosionHitPrefab: {fileID: 1121192042590650, guid: cb2edce6a5bc37349b04fe0318b25855,
+    type: 3}
+  explosionMissPrefab: {fileID: 7330985190262926334, guid: 5f713622ad1befe4e8d5fa36a91406ec,
+    type: 3}
   topSpeed: 150
   acceleration: 30
   turnSpeed: 120
   turnDelay: 1.1
+  cameraShouldFollowMissile: 0
+  target: {fileID: 4981180050763194979}
+  fire: 0
   startColor: {r: 1, g: 0, b: 0, a: 1}
   endColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  missilePrefab: {fileID: 2883211457467938878, guid: 965260d351784a6459df970ceab6eb80,
-    type: 3}
-  fire: 0
 --- !u!1 &4981180050763194980
 GameObject:
   m_ObjectHideFlags: 0

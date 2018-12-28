@@ -6,10 +6,11 @@ using UnityEngine;
 public class MissileScript : MonoBehaviour
 {
     public Rigidbody body;
-    public GameObject particlesOnDestroy;
     [Space]
     public List<Snapshot> snapshots;
     public int frame;
+
+    public Action<MissileScript> onExplode;
 
     private void FixedUpdate()
     {
@@ -39,10 +40,7 @@ public class MissileScript : MonoBehaviour
 
         Destroy(gameObject, maxLifeTime);
 
-        if (particlesOnDestroy)
-        {
-            Instantiate(particlesOnDestroy, transform.position, transform.rotation);
-        }
+        onExplode?.Invoke(this);
     }
 
     /// <summary>
