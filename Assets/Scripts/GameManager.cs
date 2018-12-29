@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     public Task Fire(Coordinate coordinate)
     {
-        return game.ShootAtAsync(coordinate, null);
+        return game.ShootAtAsync(coordinate);
     }
 
     private void SetupEventHandlers()
@@ -96,6 +96,16 @@ public class GameManager : MonoBehaviour
         {
             ship.ShipMoved += delegate { Dispatcher.Invoke(localVisualizer.OnShipMoved, ship); };
         }
+
+        game.GameStateChanged += delegate
+        {
+            if (game.GameState == GameState.InGame)
+                Dispatcher.Invoke(delegate
+                {
+                    localVisualizer.ResetAll();
+                    remoteVisualizer.ResetAll();
+                });
+        };
     }
 
     private void OnEnable()

@@ -29,11 +29,6 @@ public class BoardVisualizer : MonoBehaviour
     [SerializeField, HideInInspector]
     private List<GameObject> placed = new List<GameObject>();
 
-    private void OnEnable()
-    {
-        ResetAll();
-    }
-
     public void ResetAll()
     {
         foreach (GameObject go in placed)
