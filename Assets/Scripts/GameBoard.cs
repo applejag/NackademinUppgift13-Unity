@@ -55,17 +55,26 @@ public class GameBoard : MonoBehaviour
 
     [Header("Debug")]
     public bool updateShipPositions;
-    private void OnValidate()
+    public bool triggerBoardShow;
+    private void Update()
     {
-        if (!updateShipPositions) return;
-        updateShipPositions = false;
-
-        foreach (GameShip ship in ships)
+        if (updateShipPositions)
         {
+            updateShipPositions = false;
 
-            Vector2Int coordinate = ship.GetBoardCoordinateFromPosition();
-            Orientation orientation = DirectionToOrientation(ship.transform.forward);
-            ship.SetPositionFromCoordinate(coordinate, orientation);
+            foreach (GameShip ship in ships)
+            {
+                Vector2Int coordinate = ship.GetBoardCoordinateFromPosition();
+                Orientation orientation = DirectionToOrientation(ship.transform.forward);
+                ship.SetPositionFromCoordinate(coordinate, orientation);
+            }
+        }
+
+        if (triggerBoardShow)
+        {
+            triggerBoardShow = false;
+            isRevealed = false;
+            SetShown(true);
         }
     }
 #endif

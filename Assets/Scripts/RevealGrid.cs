@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RevealGrid : MonoBehaviour
 {
-    public float delayBetweenLines = 0.1f;
+    public float delayBetweenLines = 0.15f;
     public float delayBetweenEastSouthStart = 0.25f;
     public AnimationCurve showLineCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     public AnimationCurve hideLineCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
