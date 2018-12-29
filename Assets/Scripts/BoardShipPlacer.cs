@@ -90,7 +90,10 @@ public class BoardShipPlacer : MonoBehaviour
         foreach (GameShip boardShip in board.ships)
         {
             boardShip.gameObject.SetActive(true);
+            boardShip.transform.rotation = board.OrientationToRotation(Orientation.South);
         }
+
+        SlideTheQueue();
     }
 
     private void Update()
