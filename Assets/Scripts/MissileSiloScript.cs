@@ -45,6 +45,14 @@ public class MissileSiloScript : MonoBehaviour
         Gizmos.color = endColor;
         Gizmos.DrawSphere(target.position, 0.5f);
     }
+
+    private void Update()
+    {
+        if (!fire) return;
+        fire = false;
+
+        FireMissile(GetFrom(), target.position);
+    }
 #endif
 
     private List<Snapshot> CalculateMyPath(Vector3 from, Vector3 to)
