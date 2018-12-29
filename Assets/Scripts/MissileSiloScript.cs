@@ -11,8 +11,8 @@ public class MissileSiloScript : MonoBehaviour
     public GameObject missilePrefab;
     public GameShip[] fireFrom;
     [Space]
-    public GameObject explosionHitPrefab;
-    public GameObject explosionMissPrefab;
+    public ParticleSystem explosionHitPrefab;
+    public ParticleSystem explosionMissPrefab;
 
     [Header("Settings")]
     public float topSpeed = 10;
@@ -23,7 +23,9 @@ public class MissileSiloScript : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Testing")]
     public Transform target;
-    public bool fire;
+    public bool fireWithoutExplosion;
+    public bool fireWithHit;
+    public bool fireWithMiss;
     [Space]
     public Color startColor = Color.red;
     public Color endColor = Color.yellow;
@@ -48,10 +50,23 @@ public class MissileSiloScript : MonoBehaviour
 
     private void Update()
     {
-        if (!fire) return;
-        fire = false;
+        if (fireWithoutExplosion)
+        {
+            fireWithoutExplosion = false;
+            FireMissile(GetFrom(), target.position);
+        }
 
-        FireMissile(GetFrom(), target.position);
+        else if (fireWithHit)
+        {
+            fireWithHit = false;
+            FireMissileHit(target.position);
+        }
+
+        else if (fireWithMiss)
+        {
+            fireWithMiss = false;
+            FireMissileMiss(target.position);
+        }
     }
 #endif
 
@@ -81,12 +96,14 @@ public class MissileSiloScript : MonoBehaviour
         return FireMissileWithExplosion(GetFrom(), to, explosionMissPrefab, onExplode);
     }
 
-    private MissileScript FireMissileWithExplosion(Vector3 from, Vector3 to, GameObject explosion, Action<MissileScript> onExplode = null)
+    private MissileScript FireMissileWithExplosion(Vector3 from, Vector3 to, ParticleSystem explosion, Action<MissileScript> onExplode = null)
     {
         return FireMissile(from, to, script =>
         {
             var position = new Vector3(to.x, explosion.transform.position.y, to.z);
-            Instantiate(explosion, position, Quaternion.identity);
+            //Instantiate(explosion, position, Quaternion.identity);
+            explosion.transform.position = position;
+            explosion.Play();
 
             onExplode?.Invoke(script);
         });

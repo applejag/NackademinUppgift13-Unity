@@ -47,15 +47,12 @@ MonoBehaviour:
   missilePrefab: {fileID: 2883211457467938878, guid: 965260d351784a6459df970ceab6eb80,
     type: 3}
   fireFrom: []
-  explosionHitPrefab: {fileID: 1121192042590650, guid: cb2edce6a5bc37349b04fe0318b25855,
-    type: 3}
-  explosionMissPrefab: {fileID: 7330985190262926334, guid: 5f713622ad1befe4e8d5fa36a91406ec,
-    type: 3}
+  explosionHitPrefab: {fileID: 0}
+  explosionMissPrefab: {fileID: 0}
   topSpeed: 150
   acceleration: 30
   turnSpeed: 120
   turnDelay: 1.1
-  cameraShouldFollowMissile: 0
   target: {fileID: 4981180050763194979}
   fire: 0
   startColor: {r: 1, g: 0, b: 0, a: 1}
