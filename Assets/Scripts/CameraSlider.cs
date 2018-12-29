@@ -54,7 +54,7 @@ public class CameraSlider : MonoBehaviour
         while (target != null)
         {
             transform.position = Vector3.Lerp(transform.position, TransformTarget(target.position), Time.deltaTime * slideSpeed);
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 
