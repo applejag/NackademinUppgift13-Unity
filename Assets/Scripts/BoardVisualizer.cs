@@ -18,6 +18,7 @@ public class BoardVisualizer : MonoBehaviour
 
     [Space]
     public MissileSiloScript missileSilo;
+    public BoardVisualizerGridSelection gridSelection;
 
     [Header("Can be null")]
     public RevealFog fogRemover;
@@ -31,10 +32,11 @@ public class BoardVisualizer : MonoBehaviour
 
     private void OnEnable()
     {
-    	ResetAll();
+    	ResetAllPrefabs();
+        gridSelection.ResetSelection();
     }
 
-    public void ResetAll()
+    public void ResetAllPrefabs()
     {
         foreach (GameObject go in placed)
         {
@@ -58,6 +60,8 @@ public class BoardVisualizer : MonoBehaviour
 
         if (removeFogOnAim)
             RemoveFogAt(coordinate, false);
+
+        gridSelection.SetSelection(coordinate.x, coordinate.y);
     }
 
     public void ResetAim()

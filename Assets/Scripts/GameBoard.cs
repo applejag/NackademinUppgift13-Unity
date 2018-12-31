@@ -10,6 +10,7 @@ using UnityEngine.Events;
 public class GameBoard : MonoBehaviour
 {
     public Transform boardToWorldTransform;
+    public BoardVisualizer visualizer;
 
     public List<GameShip> ships;
     public Board protocolBoard { get; private set; } = new Board();

@@ -149,6 +149,9 @@ public class BoardShipPlacer : MonoBehaviour
         int length = selectedShip.GetLength();
         int xLength = dragOrientation == Orientation.East ? length : 1;
         int yLength = dragOrientation == Orientation.South ? length : 1;
+
+        board.visualizer.gridSelection.SetSelection(coordinate.x, coordinate.y, xLength, yLength);
+
         if (!justSelected &&
             !Board.IsOnBoard(coordinate.x, coordinate.y) &&
             !Board.IsOnBoard(coordinate.x + xLength - 1, coordinate.y + yLength - 1))
@@ -190,6 +193,7 @@ public class BoardShipPlacer : MonoBehaviour
                 allShipsPlaced.Invoke();
         }
 
+        board.visualizer.gridSelection.ResetSelection();
         selectedShip.SetPositionFromCoordinate(coordinate, dragOrientation);
         print($"moved {selectedShip.name} to {coordinate}, {dragOrientation}");
         selectedShip = null;

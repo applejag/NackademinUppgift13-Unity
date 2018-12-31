@@ -87,6 +87,28 @@ public class GameShip : MonoBehaviour
         return board.WorldToCoordinate(transform.position - GetPositionOffset());
     }
 
+    public Orientation GetBoardOrientationFromRotation()
+    {
+        return board.DirectionToOrientation(transform.forward);
+    }
+
+    public Vector2Int[] GetBoardCoordinatesFromPosition()
+    {
+        var coordinates = new Vector2Int[Ship.GetShipLength(shipType)];
+        coordinates[0] = GetBoardCoordinateFromPosition();
+
+        Vector2Int increment = GetBoardOrientationFromRotation() == Orientation.East
+            ? Vector2Int.right
+            : Vector2Int.up;
+
+        for (var i = 1; i < coordinates.Length; i++)
+        {
+            coordinates[i] = coordinates[0] + increment * i;
+        }
+
+        return coordinates;
+    }
+
     public Vector3 GetPositionOffset()
     {
         return transform.TransformVector(offset);

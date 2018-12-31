@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
             if (game.GameState == GameState.InGame)
                 Dispatcher.Invoke(delegate
                 {
-                    localVisualizer.ResetAll();
-                    remoteVisualizer.ResetAll();
+                    localVisualizer.ResetAllPrefabs();
+                    remoteVisualizer.ResetAllPrefabs();
                 });
         };
     }

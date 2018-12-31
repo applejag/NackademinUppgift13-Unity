@@ -67,6 +67,8 @@ public class GameShootingThing : MonoBehaviour
         if (!Input.GetMouseButton(0)) return;
 
         Vector2Int coordinate = board.ScreenSpaceToCoordinate(Input.mousePosition);
+
+        if (coordinate == selectedCoordinate) return;
         if (!Board.IsOnBoard(coordinate.x, coordinate.y)) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -76,7 +78,7 @@ public class GameShootingThing : MonoBehaviour
 
         if (game.game.RemotePlayer.Board.IsShotAt((coordinate.x, coordinate.y)))
             return;
-
+        
         selectedCoordinate = coordinate;
         textFireButton.text = FormatString(coordinate);
         buttonFireButton.interactable = true;
@@ -90,6 +92,7 @@ public class GameShootingThing : MonoBehaviour
         textFireButton.text = fireInProgress;
         buttonFireButton.interactable = false;
         enabled = false;
+        visualizer.gridSelection.ResetSelection();
 
         game.Fire(new Coordinate(selectedCoordinate.x, selectedCoordinate.y))
             .ContinueWith(Dispatcher.Wrap<Task>(task =>
